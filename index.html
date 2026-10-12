@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shirley 英语口语 · 课堂复习站</title>
+<style>
+  :root{
+    --bg:#faf8f5; --card:#ffffff; --ink:#23272f; --sub:#8a857e;
+    --accent:#b3542e; --accent-soft:#f9ece5; --ok:#3f7d5a; --warn:#b57e2a;
+    --line:#ece7df; --dark:#211d19; --dark2:#2e2924;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.8}
+  .layout{display:flex;min-height:100vh}
+  /* ---------- sidebar ---------- */
+  .sidebar{width:272px;background:var(--dark);color:#d8d2ca;padding:26px 16px;position:fixed;top:0;bottom:0;left:0;overflow-y:auto;flex-shrink:0}
+  .brand{font-size:19px;color:#fff;margin-bottom:4px}
+  .brand span{color:var(--accent)}
+  .tagline{font-size:12px;color:#948c81;margin-bottom:22px}
+  .nav-title{font-size:11px;letter-spacing:2px;color:#7d766b;margin:18px 0 8px}
+  .lesson-link{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:#c4bcb1;cursor:pointer;text-decoration:none;margin-bottom:4px;transition:.15s}
+  .lesson-link:hover{background:var(--dark2);color:#fff}
+  .lesson-link.active{background:var(--accent);color:#fff}
+  .lesson-num{width:24px;height:24px;border-radius:7px;background:var(--dark2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+  .lesson-link.active .lesson-num{background:rgba(255,255,255,.22)}
+  .lesson-name{font-size:13.5px}
+  .lesson-date{font-size:11px;color:#7d766b;margin-left:auto}
+  .lesson-link.active .lesson-date{color:rgba(255,255,255,.8)}
+  /* ---------- main ---------- */
+  .main{margin-left:272px;flex:1;padding:40px 46px;max-width:940px}
+  /* home */
+  .hero{padding:34px 0 10px}
+  .hero .book{font-size:40px}
+  .hero h1{font-size:30px;margin:8px 0 10px}
+  .hero p{color:var(--sub);max-width:560px}
+  .stats{display:flex;gap:16px;margin:28px 0 34px;flex-wrap:wrap}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 26px;min-width:140px}
+  .stat b{font-size:26px;color:var(--accent)}
+  .stat div{font-size:12.5px;color:var(--sub);margin-top:2px}
+  /* lesson head */
+  .lesson-kicker{font-size:13px;font-weight:700;letter-spacing:3px;color:var(--accent)}
+  h2.page-title{font-size:26px;margin:6px 0 12px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;font-size:13.5px;color:var(--sub)}
+  .meta span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 14px}
+  .summary{color:var(--sub);font-size:14px;margin:6px 0 26px}
+  /* sections */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 28px;margin-bottom:18px;box-shadow:0 1px 3px rgba(35,39,47,.04)}
+  .card h3{font-size:17.5px;margin-bottom:16px}
+  /* dialogue lines */
+  .line{margin-bottom:12px}
+  .line .en{font-size:15.5px;font-weight:600}
+  .line .cn{color:var(--sub);font-size:14px}
+  .tip{color:var(--warn);background:#fbf6ec;border:1px solid #f0e4c8;border-radius:10px;padding:8px 14px;font-size:13.5px;margin:4px 0 12px}
+  .tip b{color:var(--warn)}
+  /* vocab */
+  .word{display:flex;gap:12px;padding:11px 4px;border-bottom:1px dashed var(--line);align-items:baseline}
+  .word:last-child{border-bottom:none}
+  .word .w{font-weight:700;font-size:15.5px;min-width:150px}
+  .word .ipa{color:var(--accent);font-size:13px}
+  .word .pos{color:var(--sub);font-size:12.5px;min-width:36px}
+  .word .mean{font-size:14.5px}
+  .word .note{display:block;font-size:12.5px;color:var(--sub);margin-top:2px}
+  /* reading */
+  .reading{font-size:15.5px;line-height:2;background:#f7f4ef;border-radius:12px;padding:18px 20px;margin:8px 0 12px}
+  .reading b{color:var(--accent)}
+  .gist{font-size:14px;color:var(--sub);background:var(--accent-soft);border-radius:10px;padding:10px 14px}
+  /* icon cards */
+  .tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .tip-card{background:#f7f4ef;border-radius:12px;padding:14px 16px}
+  .tip-card .ic{font-size:20px}
+  .tip-card b{display:block;margin:4px 0 2px;font-size:14.5px}
+  .tip-card p{font-size:13.5px;color:var(--sub)}
+  /* formula */
+  .formula{background:var(--dark);color:#ece7df;border-radius:12px;padding:14px 18px;font-family:Consolas,Menlo,monospace;font-size:14.5px;margin:10px 0;text-align:center}
+  .formula b{color:#f0a583}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+  .chip{background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:4px 13px;font-size:13px;font-weight:600}
+  /* examples */
+  .ex{border-left:3px solid var(--accent);padding:2px 0 2px 14px;margin-bottom:12px}
+  .ex .en{font-weight:600;font-size:15px}
+  .ex .cn{color:var(--sub);font-size:13.5px}
+  /* expressions */
+  .expr{display:flex;gap:14px;padding:10px 4px;border-bottom:1px dashed var(--line);align-items:baseline}
+  .expr:last-child{border-bottom:none}
+  .expr .p{font-weight:700;min-width:170px;font-size:15px}
+  .expr .d{font-size:13.5px;color:var(--sub)}
+  /* conversation */
+  .turn{display:flex;gap:12px;margin-bottom:12px}
+  .turn .who{width:64px;flex-shrink:0;font-weight:700;font-size:13px;color:var(--accent);padding-top:2px}
+  .turn .bubble{background:#f7f4ef;border-radius:12px;padding:10px 16px;flex:1}
+  .turn .bubble .en{font-weight:600}
+  .turn .bubble .cn{color:var(--sub);font-size:13.5px}
+  .turn .note{display:block;font-size:12.5px;color:var(--accent);margin-top:4px}
+  /* tasks */
+  .task{display:flex;gap:12px;padding:10px 4px;border-bottom:1px dashed var(--line)}
+  .task:last-child{border-bottom:none}
+  .task .ic{font-size:19px}
+  .task b{display:block;font-size:14.5px}
+  .task p{font-size:13.5px;color:var(--sub)}
+  .footer{color:var(--sub);font-size:12.5px;text-align:center;padding:26px 0}
+  @media (max-width:860px){
+    .sidebar{position:static;width:100%;height:auto}
+    .layout{flex-direction:column}
+    .main{margin-left:0;padding:24px 16px}
+    .tips-grid{grid-template-columns:1fr}
+    .word{flex-wrap:wrap}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">Shirley <span>英语口语</span></div>
+    <div class="tagline">课堂复习站 · Mike 1v1</div>
+    <div class="nav-title">课程列表</div>
+    <nav id="lessonNav"></nav>
+  </aside>
+  <main class="main" id="content"></main>
+</div>
+
+<script>
+/* ================================================================
+   📒 课程笔记数据区
+   新增一节课：复制 LESSONS 中的一整段 { id, title, ... }，
+   粘贴到数组末尾（注意前面加逗号），页面和导航自动生成。
+   支持的模块类型：dialog / vocab / reading / tips / grammar /
+   examples / exprs / convo / tasks
+   ================================================================ */
+const LESSONS = [
+  {
+    id: 1,
+    title: "试听课专项：Free Talk 摸底 + 疑问句入门 + 朗读训练",
+    date: "2026-10-10",
+    teacher: "Mike 老师",
+    student: "Shirley",
+    summary: "自我介绍摸底 · Sabrina Carpenter 美妆视频朗读 · 特殊疑问句/一般疑问句 · 外贸引导式沟通理念",
+    sections: [
+      { type:"h3", text:"🌅 开场输出练习 · Self Introduction" },
+      { type:"dialog", lines:[
+        { en:"My name is Shirley and I am a foreign trade salesperson.", cn:"我叫 Shirley，是一名外贸业务员。", tip:"✅ 完整的主系表句型，表达准确、不卡壳" },
+        { en:"My company sells construction machinery, like tractors and skid steer loaders.", cn:"公司主营工程机械类产品，比如拖拉机和滑移装载机。", tip:"💡 machinery /məˈʃiːnəri/ 机械（总称）；skid steer loader 滑移装载机，专业词汇要记牢" },
+        { en:"I just graduated in July. My major is international economics and trade.", cn:"我今年 7 月刚毕业，专业是国际经济与贸易。", tip:"💡 fresh graduate 应届毕业生；major 作名词=专业" },
+        { en:"The atmosphere in my team is relaxed. My team leader teaches me a lot.", cn:"团队氛围很轻松，团队长教了我很多东西。", tip:"💡 atmosphere 氛围；relaxed /rɪˈlækst/ 放松的" }
+      ]},
+      { type:"h3", text:"📚 朗读材料生词（Sabrina Carpenter 美妆教程节选）" },
+      { type:"vocab", words:[
+        { w:"tutorial", ipa:"/tjuːˈtɔːriəl/", pos:"n.", mean:"教学教程", note:"a 10-minute beauty tutorial 十分钟美妆教程" },
+        { w:"makeup", ipa:"/ˈmeɪkʌp/", pos:"n.", mean:"化妆；妆容", note:"do my makeup 化妆" },
+        { w:"concealer", ipa:"/kənˈsiːlə(r)/", pos:"n.", mean:"遮瑕膏", note:"LAURA MERCIER ultra longwear concealer 持妆遮瑕" },
+        { w:"foundation", ipa:"/faʊnˈdeɪʃn/", pos:"n.", mean:"底妆；粉底", note:"⚠️ 不是 foundation 基础义，美妆语境=粉底" },
+        { w:"blend out", ipa:"/blend aʊt/", pos:"phr.", mean:"晕染均匀；混合开", note:"blend out with foundation 用粉底把它晕开" },
+        { w:"natural light", ipa:"/ˈnætʃrəl laɪt/", pos:"n.", mean:"自然光", note:"by a big window 在大窗户旁（化妆光线好）" }
+      ]},
+      { type:"h3", text:"🗣️ 朗读材料（演讲/视频节选 + 大意）" },
+      { type:"reading", text:"Hi, it's Sabrina Carpenter and I'm going to take you guys through my 10-minute <b>beauty tutorial</b>. One of my favorite places to do my makeup is by a big window, because there's a lot of <b>natural light</b> and you end up getting a better result. I usually start by putting on <b>concealer</b> — all the places that I feel I need it — and then I blend it out with <b>foundation</b>, because I don't like to use a lot of foundation.",
+        gist:"📖 段落大意：Sabrina Carpenter 带大家做十分钟美妆教程。她喜欢在自然光充足的大窗边化妆，这样妆效更好；她习惯先上遮瑕膏，再用粉底晕染开，因为不喜欢厚重的底妆。" },
+      { type:"h3", text:"🎵 朗读要点（Mike 提醒）" },
+      { type:"tips", cards:[
+        { ic:"🔤", t:"单个发音过关", d:"每个单词的发音没有太大问题，这是很好的底子" },
+        { ic:"🔗", t:"连读弱读是短板", d:"linking & reduction 较弱，长段落第一次读会很吃力，要专项练" },
+        { ic:"⏸️", t:"按意群停顿", d:"不要逐词蹦，3~5 个词一个词块，词块之间停一停" },
+        { ic:"📈", t:"节奏有起伏", d:"不要平铺直叙地「读」，要真的像「说话」一样，快慢结合" },
+        { ic:"👂", t:"听力反应偏慢", d:"关键词能抓住，但整句细节跟不上——平时英语对话练得太少" },
+        { ic:"💧", t:"口语词汇量偏少", d:"想表达时卡壳不是语法问题，是单词储备不够 → 每天打卡补词" }
+      ]},
+      { type:"h3", text:"❓ 语法一：特殊疑问句（开放式提问）" },
+      { type:"grammar", formula:"疑问词 + 助动词 + 主语 + 动词原形？",
+        intro:[
+          "疑问句分两大类：<b>一般疑问句</b>（yes/no 回答，助动词/be 动词/情态动词提前）和<b>特殊疑问句</b>（开放式提问）。",
+          "⭐ 本课核心例句：What's your main business? 你们的主营业务是什么？",
+          "造句逻辑：第 1 位放疑问词，第 2 位放助动词，助动词由<b>主语</b>决定——主语是第三人称单数（公司/产品）用 <b>is</b>，主语是 you 用 <b>are</b>。",
+          "🚫 易错：What's your main business <b>you</b>? —— 主语位置不能重复 you。"
+        ],
+        chipsTitle:"疑问词 5W1H",
+        chips:["what 什么","who 谁","where 哪里","when 何时","why 为什么","which 哪一个","how 怎样"],
+        chips2Title:"助动词",
+        chips2:["do / does（实义动词句）","am / is / are（be 动词句）","can / could / will / would / should（情态动词）"] },
+      { type:"h3", text:"💼 特殊疑问句 · 工程机械外贸实战例句" },
+      { type:"examples", list:[
+        { en:"What kind of machinery are you looking for?", cn:"您在找哪一类机械产品？", tip:"💡 what kind of + 名词 → 开放式问需求" },
+        { en:"Which model fits your project best?", cn:"哪个型号最适配您的项目？", tip:"💡 which + 名词 → 在给定范围内选择" },
+        { en:"Where do you usually find suppliers?", cn:"您通常在哪里找供应商？", tip:"💡 主语是 you → 用 do；he 则用 does" },
+        { en:"Where could you find a new channel?", cn:"您在哪里可以找到新的渠道？", tip:"💡 could 比 can 更委婉，适合问客户" },
+        { en:"Who is responsible for purchasing on your team?", cn:"你们团队谁负责采购？", tip:"💡 responsible for purchasing 负责采购" },
+        { en:"When do you expect to receive the quotation?", cn:"您预计什么时候收到报价？", tip:"💡 expect 预期；quotation 报价单" },
+        { en:"Why is the delivery time so important to you?", cn:"为什么交期对你们如此重要？", tip:"💡 delivery time 交期——问到痛点才显得专业" },
+        { en:"How do you evaluate a new machinery supplier?", cn:"你们如何评估新的机械供应商？", tip:"💡 evaluate /ɪˈvæljueɪt/ 评估" }
+      ]},
+      { type:"h3", text:"✅ 语法二：一般疑问句（Yes/No 问句）—— 把助动词 / 情态动词 / be 动词提到句首即可" },
+      { type:"examples", list:[
+        { en:"Are you interested in our tractors?", cn:"您对我们的拖拉机感兴趣吗？", tip:"💡 主语是 you → 用 are" },
+        { en:"Is your team ready for the new project?", cn:"你们团队为新项目准备好了吗？" },
+        { en:"Could you share your company catalog?", cn:"您可以分享一下贵公司的产品目录吗？", tip:"⭐ share 比 tell 更委婉、更商务" },
+        { en:"Would you consider our skid steer loaders?", cn:"您会考虑我们的滑移装载机吗？", tip:"💡 consider 考虑——给客户留余地" },
+        { en:"Should we send you the quotation this week?", cn:"我们这周把报价发给您好吗？" },
+        { en:"Will you place the order next month?", cn:"你们下个月会下单吗？", tip:"💡 place the order 下单" },
+        { en:"Shall we arrange an online meeting?", cn:"要不我们安排一次线上会议？", tip:"⚠️ shall 只能用于 I / we" }
+      ]},
+      { type:"h3", text:"🧰 高频口语表达（商业 + 日常通用）" },
+      { type:"exprs", list:[
+        { p:"I want to…", d:"我想……（商务陈述需求，正式）", ex:"I want to improve my English to do my work the best." },
+        { p:"I'm not used to…", d:"我不习惯……", ex:"I'm not used to talking with foreign clients." },
+        { p:"I'm not sure if…", d:"我不确定……——谈判不能拍板时的缓冲句", ex:"I'm not sure if the mini model is in stock." },
+        { p:"I'd recommend…", d:"我会推荐……——引导客户的好句式", ex:"I'd recommend it to my friends / clients." },
+        { p:"obviously /ˈɒbviəsli/", d:"显然——老外高频口头禅", ex:"Obviously, quality comes first." },
+        { p:"exactly", d:"没错，正是——先肯定客户的话", ex:"Exactly! That's what I mean." },
+        { p:"awesome /ˈɔːsəm/", d:"太棒了——回答 How are you 也可以用", ex:"Awesome! Let's do it." },
+        { p:"but you know what", d:"不过你知道吗——转折，引出自己的诉求", ex:"It's expensive, but you know what, the quality is worth it." },
+        { p:"reliable", d:"可靠的——reliable supplier 可靠的供应商", ex:"We are a reliable supplier of machinery." },
+        { p:"convenient", d:"方便的——It's convenient to do…", ex:"It's convenient to chat on WhatsApp." }
+      ]},
+      { type:"h3", text:"🧳 情景对话示范：WhatsApp 上开发工程机械客户" },
+      { type:"convo", turns:[
+        { who:"Shirley", en:"Hi, I'm Shirley from XX Machinery. Nice to meet you.", cn:"你好，我是 XX 机械的 Shirley，很高兴认识您。", note:"先自报家门，不要上来就问需求" },
+        { who:"Client", en:"Nice talking to you too.", cn:"我也很高兴认识你。" },
+        { who:"Shirley", en:"I see you're in the agricultural machinery business. What kind of equipment are you looking for?", cn:"了解到您做农业机械方面的生意，您在找哪类设备？", note:"⭐ 一句陈述 + 一个开放提问，自然切入" },
+        { who:"Client", en:"Mainly tractors, small to medium size.", cn:"主要是中小型拖拉机。" },
+        { who:"Shirley", en:"Sounds great. What impressed you most about your current supplier?", cn:"不错。您现在的供应商最让您满意的地方是什么？", note:"💡 问出对方在乎的点（质量/交期/价格）" },
+        { who:"Client", en:"The price is good, but delivery is always late.", cn:"价格不错，但交期总是拖。" },
+        { who:"Shirley", en:"I totally understand — late delivery costs you more than a higher price, right? Our standard lead time is only 15 days.", cn:"完全理解——交期延误造成的损失比贵一点更大，对吗？我们的标准交期只要 15 天。", note:"🎯 引导客户认同你的价值，而不是只拼价格" },
+        { who:"Shirley", en:"Would you like me to send you our catalog and a quotation?", cn:"需要我把产品目录和报价发给您吗？", note:"⭐ 用 would you like 收尾，推进下一步" }
+      ]},
+      { type:"h3", text:"💡 情景对话技巧总结" },
+      { type:"tips", cards:[
+        { ic:"👋", t:"先开场白，别直接甩问题", d:"自报家门 + 一句陈述/夸赞，再自然提问" },
+        { ic:"🧭", t:"业务中要学会主导", d:"不能客户说什么就是什么，要引导对话方向、学会反问" },
+        { ic:"🎯", t:"问到痛点才专业", d:"客户嫌 5000 美金贵 → 反问交期、质量、售后责任，让他看到价值" },
+        { ic:"🔄", t:"沟通 = 一问一答", d:"做减法：学会提问 + 学会回答，口语内容自然就有了" },
+        { ic:"🙅", t:"不要照本宣科背对话", d:"按模板背出来的口语没有灵魂，要理解逻辑自己造句" },
+        { ic:"👂", t:"聆听的前提是提问", d:"只接收不互动，聊三分钟客户就没兴趣了" }
+      ]},
+      { type:"h3", text:"📌 课后任务 & 学习计划" },
+      { type:"tasks", list:[
+        { ic:"📝", t:"每天单词打卡", d:"每天完成单词训练后截图发给 Mike，单词靠自己积累，课上主攻语法和口语" },
+        { ic:"📕", t:"发送公司 Catalog", d:"把公司的产品目录（catalog）发给 Mike，教材将围绕 tractor / 工程机械定制" },
+        { ic:"📅", t:"课程安排", d:"2 个月 / 16 课时，每周 2 次，每次 60 分钟（暂定周二、周四 20:30–21:30）" },
+        { ic:"🎧", t:"每天 30–60 分钟", d:"不上课的日子也保持学习；非上课期间作业宽松，正式开课后严格打卡" },
+        { ic:"📖", t:"下节课内容", d:"先巩固「学会提问」，之后进入陈述句造句法——学会怎么「说」" },
+        { ic:"🎯", t:"阶段目标", d:"两个月后，日常沟通流利表达，工作场景英语口语实战可用" }
+      ]}
+    ]
+  }
+  /* 👇 新课时复制从这里开始 👇
+  ,{
+    id: 2,
+    title: "Lesson 2 · ……",
+    date: "2026-10-14",
+    summary: "……",
+    sections: [ ... ]
+  }
+  */
+];
+
+/* ================== 渲染逻辑（无需修改） ================== */
+function esc(s){ return s; }
+
+function renderNav(activeId){
+  const nav = document.getElementById('lessonNav');
+  nav.innerHTML = LESSONS.map(l => `
+    <a class="lesson-link ${l.id===activeId?'active':''}" href="#/lesson/${l.id}">
+      <span class="lesson-num">${l.id}</span>
+      <span class="lesson-name">${l.title.split('·')[0].trim().slice(0,14)}</span>
+      <span class="lesson-date">${l.date.slice(5).replace('-','/')}</span>
+    </a>`).join('');
+}
+
+function dialogHTML(lines){
+  return lines.map(l=>`
+    <div class="line"><div class="en">${l.en}</div><div class="cn">${l.cn||''}</div></div>
+    ${l.tip?`<div class="tip">${l.tip}</div>`:''}`).join('');
+}
+
+function renderLesson(l){
+  let body = '';
+  let i = 0;
+  while(i < l.sections.length){
+    const s = l.sections[i];
+    if(s.type==="h3"){
+      let inner = '';
+      let j = i+1;
+      while(j < l.sections.length && l.sections[j].type!=="h3"){
+        const b = l.sections[j]; j++;
+        if(b.type==="dialog") inner += dialogHTML(b.lines);
+        if(b.type==="vocab") inner += b.words.map(w=>`
+          <div class="word"><span class="w">${w.w} <span class="ipa">${w.ipa||''}</span></span><span class="pos">${w.pos||''}</span>
+          <span class="mean">${w.mean}${w.note?`<span class="note">${w.note}</span>`:''}</span></div>`).join('');
+        if(b.type==="reading") inner += `<div class="reading">${b.text}</div><div class="gist">${b.gist}</div>`;
+        if(b.type==="tips") inner += `<div class="tips-grid">${b.cards.map(c=>`
+          <div class="tip-card"><div class="ic">${c.ic}</div><b>${c.t}</b><p>${c.d}</p></div>`).join('')}</div>`;
+        if(b.type==="grammar"){
+          inner += `<div class="formula">${b.formula}</div>`;
+          inner += `<ul style="padding-left:20px">${b.intro.map(x=>`<li style="margin-bottom:8px;font-size:14.5px">${x}</li>`).join('')}</ul>`;
+          if(b.chips){ inner += `<div style="font-size:13px;color:var(--sub);margin-top:10px">${b.chipsTitle}</div><div class="chips">${b.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div>`; }
+          if(b.chips2){ inner += `<div style="font-size:13px;color:var(--sub);margin-top:4px">${b.chips2Title}</div><div class="chips">${b.chips2.map(c=>`<span class="chip">${c}</span>`).join('')}</div>`; }
+        }
+        if(b.type==="examples") inner += b.list.map(e=>`
+          <div class="ex"><div class="en">${e.en}</div><div class="cn">${e.cn||''}</div>
+          ${e.tip?`<div class="tip" style="margin:8px 0 0">${e.tip}</div>`:''}</div>`).join('');
+        if(b.type==="exprs") inner += b.list.map(e=>`
+          <div class="expr"><span class="p">${e.p}</span><span class="d">${e.d}${e.ex?`　→ ${e.ex}`:''}</span></div>`).join('');
+        if(b.type==="convo") inner += b.turns.map(t=>`
+          <div class="turn"><div class="who">${t.who}</div>
+          <div class="bubble"><div class="en">${t.en}</div><div class="cn">${t.cn||''}</div>
+          ${t.note?`<span class="note">${t.note}</span>`:''}</div></div>`).join('');
+        if(b.type==="tasks") inner += b.list.map(t=>`
+          <div class="task"><div class="ic">${t.ic}</div><div><b>${t.t}</b><p>${t.d}</p></div></div>`).join('');
+      }
+      body += `<div class="card"><h3>${s.text}</h3>${inner}</div>`;
+      i = j;
+    } else { i++; }
+  }
+  document.getElementById('content').innerHTML = `
+    <div class="lesson-kicker">LESSON ${l.id}</div>
+    <h2 class="page-title">${l.title}</h2>
+    <div class="meta"><span>📅 ${l.date}</span><span>👨‍🏫 ${l.teacher||'Mike 老师'}</span><span>👤 ${l.student||'Shirley'}</span></div>
+    <div class="summary">${l.summary||''}</div>
+    ${body}
+    <div class="footer">📒 Shirley 英语口语 · 课堂复习站 · 每节课一页 · 持续更新</div>`;
+}
+
+function renderHome(){
+  const modules = LESSONS.reduce((n,l)=>n+l.sections.filter(s=>s.type==="h3").length,0);
+  const words = LESSONS.reduce((n,l)=>n+l.sections.reduce((m,s)=>m+((s.words&&s.words.length)||0),0),0);
+  document.getElementById('content').innerHTML = `
+    <div class="hero"><div class="book">📒</div>
+      <h1>Shirley 英语口语 · 课堂复习站</h1>
+      <p>每一节课的重点、单词、句型、对话示范都会整理在这里。上课前翻一翻、作业前看一看，把课堂内容真正变成自己的东西。</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>${LESSONS.length}</b><div>已更新课程</div></div>
+      <div class="stat"><b>${modules}</b><div>知识模块</div></div>
+      <div class="stat"><b>${words}</b><div>工程机械高频词</div></div>
+    </div>
+    <div class="footer">📒 Shirley 英语口语 · 课堂复习站 · 每节课一页 · 持续更新</div>`;
+  renderNav(0);
+}
+
+function route(){
+  const m = location.hash.match(/#\/lesson\/(\d+)/);
+  if(m){
+    const l = LESSONS.find(x=>x.id==m[1]) || LESSONS[0];
+    renderNav(l.id);
+    renderLesson(l);
+  } else {
+    renderHome();
+  }
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>
