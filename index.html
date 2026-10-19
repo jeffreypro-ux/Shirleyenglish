@@ -99,7 +99,17 @@
   .task .ic{font-size:19px}
   .task b{display:block;font-size:14.5px}
   .task p{font-size:13.5px;color:var(--sub)}
-  .footer{color:var(--sub);font-size:12.5px;text-align:center;padding:26px 0}
+  .quiz-group{font-weight:700;color:var(--accent);margin:16px 0 6px;font-size:15px}
+  .quiz{border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:10px;background:#fbfaf8}
+  .quiz .q{font-size:15px;font-weight:600;margin-bottom:6px}
+  .quiz .hint{font-size:12.5px;color:var(--sub);margin-bottom:6px}
+  .quiz details summary{cursor:pointer;font-size:13px;color:var(--accent);font-weight:600;list-style:none}
+  .quiz details summary::before{content:"👀 查看参考答案"}
+  .quiz details[open] summary::before{content:"🙈 收起答案"}
+  .quiz .a{margin-top:8px;background:var(--accent-soft);border-radius:8px;padding:8px 12px;font-size:14.5px}
+  .quiz .a .cn{color:var(--sub);font-size:13px}
+  .quiz .a .tip{margin:6px 0 0;font-size:12.5px}
+  .footer{color:var(--sub)};font-size:12.5px;text-align:center;padding:26px 0}
   @media (max-width:860px){
     .sidebar{position:static;width:100%;height:auto}
     .layout{flex-direction:column}
@@ -108,6 +118,7 @@
     .word{flex-wrap:wrap}
   }
 </style>
+<base target="_blank">
 </head>
 <body>
 <div class="layout">
@@ -131,7 +142,8 @@
 const LESSONS = [
   {
     id: 1,
-    title: "试听课专项：Free Talk 摸底 + 疑问句入门 + 朗读训练",
+    label: "试听课",
+    title: "试听课 · Free Talk 摸底 + 疑问句入门 + 朗读训练",
     date: "2026-10-10",
     teacher: "Mike 老师",
     student: "Shirley",
@@ -177,16 +189,50 @@ const LESSONS = [
         chips:["what 什么","who 谁","where 哪里","when 何时","why 为什么","which 哪一个","how 怎样"],
         chips2Title:"助动词",
         chips2:["do / does（实义动词句）","am / is / are（be 动词句）","can / could / will / would / should（情态动词）"] },
-      { type:"h3", text:"💼 特殊疑问句 · 工程机械外贸实战例句" },
-      { type:"examples", list:[
-        { en:"What kind of machinery are you looking for?", cn:"您在找哪一类机械产品？", tip:"💡 what kind of + 名词 → 开放式问需求" },
-        { en:"Which model fits your project best?", cn:"哪个型号最适配您的项目？", tip:"💡 which + 名词 → 在给定范围内选择" },
-        { en:"Where do you usually find suppliers?", cn:"您通常在哪里找供应商？", tip:"💡 主语是 you → 用 do；he 则用 does" },
-        { en:"Where could you find a new channel?", cn:"您在哪里可以找到新的渠道？", tip:"💡 could 比 can 更委婉，适合问客户" },
-        { en:"Who is responsible for purchasing on your team?", cn:"你们团队谁负责采购？", tip:"💡 responsible for purchasing 负责采购" },
-        { en:"When do you expect to receive the quotation?", cn:"您预计什么时候收到报价？", tip:"💡 expect 预期；quotation 报价单" },
-        { en:"Why is the delivery time so important to you?", cn:"为什么交期对你们如此重要？", tip:"💡 delivery time 交期——问到痛点才显得专业" },
-        { en:"How do you evaluate a new machinery supplier?", cn:"你们如何评估新的机械供应商？", tip:"💡 evaluate /ɪˈvæljueɪt/ 评估" }
+      { type:"h3", text:"💼 中译英练习：5W1H 特殊疑问句 × 恒旺机械真实场景（每词 2 句）" },
+      { type:"quiz", groups:[
+        { name:"❓ WHAT · 什么 / 多少", items:[
+          { q:"你们的主营产品是什么？", hint:"main product", a:"What's your main product?",
+            tip:"💡 本课核心句型：疑问词 What + is + 主语 your main product（三单用 is）" },
+          { q:"这台 HW-10 的最大挖掘深度是多少？", hint:"maximum digging depth · 1600 mm", a:"What is the maximum digging depth of the HW-10?",
+            tip:"💡 参数类提问万能句：What is the + 参数名 + of + 型号？（斗容 bucket capacity / 功率 power / 整机重量 operating weight 都能套）" }
+        ]},
+        { name:"👤 WHO · 谁", items:[
+          { q:"你们团队谁负责报价？", hint:"responsible for · quotation", a:"Who is responsible for the quotation in your team?",
+            tip:"💡 be responsible for + 名词：负责某事" },
+          { q:"如果机器出故障，我应该联系谁？", hint:"break down · contact", a:"If the machine breaks down, who should I contact?",
+            tip:"💡 break down 出故障（机器）；contact 联系——售后场景高频" }
+        ]},
+        { name:"📍 WHERE · 哪里", items:[
+          { q:"贵公司位于哪个城市？", hint:"located in · Jining, Shandong", a:"Where is your company located?",
+            tip:"💡 be located in + 地点：位于……（公司地址：山东济宁 Jining, Shandong）" },
+          { q:"这款迷你挖掘机可以在哪些狭窄空间作业？", hint:"narrow spaces · greenhouse / orchard / elevator", a:"Where can this mini excavator work in narrow spaces?",
+            tip:"💡 catalog 原话：elevators, indoors, orchards, and greenhouses——答客户时可以直接报这些场景" }
+        ]},
+        { name:"📅 WHEN · 什么时候", items:[
+          { q:"您预计什么时候下单？", hint:"expect to · place the order", a:"When do you expect to place the order?",
+            tip:"💡 expect to do 预计做某事；place the order 下单" },
+          { q:"我们什么时候能收到报价单？", hint:"quotation", a:"When can we receive the quotation?",
+            tip:"💡 receive 收到——客户催报价时的标准问法" }
+        ]},
+        { name:"💡 WHY · 为什么", items:[
+          { q:"为什么 HW-10 特别适合果园挖沟？", hint:"digging ditches in orchards", a:"Why is the HW-10 especially suitable for digging ditches in orchards?",
+            tip:"💡 suitable for + 名词/动名词：适合做……；catalog 原文场景，背下来直接用" },
+          { q:"为什么交期对你们这么重要？", hint:"delivery time", a:"Why is the delivery time so important to you?",
+            tip:"💡 问到痛点（pain point）客户才会觉得你专业——Mike 课堂重点" }
+        ]},
+        { name:"🔀 WHICH · 哪一个", items:[
+          { q:"HW-10 和 HW-15 之间，您更倾向哪一款？", hint:"between A and B", a:"Which one do you prefer between the HW-10 and the HW-15?",
+            tip:"💡 between A and B 在两者之间比较；prefer 更倾向" },
+          { q:"这三款型号中，哪一款最适合大棚作业？", hint:"best for · greenhouse", a:"Which of these three models is best for greenhouse work?",
+            tip:"💡 which + of 范围：在……之中哪一个" }
+        ]},
+        { name:"⚙️ HOW · 怎样 / 如何", items:[
+          { q:"这台挖掘机如何配合辅具实现一机多用？", hint:"attachments · multiple functions", a:"How does this excavator achieve multiple functions with various attachments?",
+            tip:"💡 catalog 原文：with the cooperation of various attachments, it can achieve multiple functions" },
+          { q:"你们通常如何评估一个新的供应商？", hint:"evaluate · supplier", a:"How do you evaluate a new supplier?",
+            tip:"💡 反问客户了解其采购标准，方便你展示公司优势" }
+        ]}
       ]},
       { type:"h3", text:"✅ 语法二：一般疑问句（Yes/No 问句）—— 把助动词 / 情态动词 / be 动词提到句首即可" },
       { type:"examples", list:[
@@ -242,11 +288,168 @@ const LESSONS = [
       ]}
     ]
   }
-  /* 👇 新课时复制从这里开始 👇
   ,{
     id: 2,
-    title: "Lesson 2 · ……",
-    date: "2026-10-14",
+    label: "正式课 · 第 1 节",
+    title: "第 1 节 · 特殊疑问句精讲 + 中译英实战 + 客户接待对话",
+    date: "2026-10-18",
+    teacher: "Mike 老师",
+    student: "Shirley",
+    summary: "热身朗读《A Private Conversation》· 特殊疑问句公式拆解 · HOW 家族专项 · 库存/物流/参数实战造句 · 外国客户到访接待对话",
+    sections: [
+      { type:"h3", text:"🌅 热身朗读 · A Private Conversation（新概念经典课文）" },
+      { type:"vocab", words:[
+        { w:"theater", ipa:"/ˈθɪətə(r)/", pos:"n.", mean:"剧院，戏院", note:"go to the theater 去看戏" },
+        { w:"loudly", ipa:"/ˈlaʊdli/", pos:"adv.", mean:"大声地", note:"talk loudly 大声说话" },
+        { w:"turn around", ipa:"/tɜːn əˈraʊnd/", pos:"phr.", mean:"转身；转过头", note:"I turned around and looked at them." },
+        { w:"private", ipa:"/ˈpraɪvət/", pos:"adj.", mean:"私人的", note:"a private conversation 私人谈话" },
+        { w:"rude", ipa:"/ruːd/", pos:"adj.", mean:"粗鲁的，无礼的", note:"said rudely 粗鲁地说" },
+        { w:"none of your business", ipa:"/nʌn əv jɔː ˈbɪznəs/", pos:"phr.", mean:"不关你的事", note:"⭐ 超高频口语，字面义=不属于你的事" }
+      ]},
+      { type:"reading", text:"Last week I went to <b>the theater</b>. I had a very good seat. The play was very interesting, but I did not enjoy it. A young man and a young woman were sitting behind me. They were talking <b>loudly</b>. I got very angry. I could not hear the actors. I <b>turned around</b> and looked at the man and the woman angrily. They did not pay any attention. In the end, I could not bear it. I turned round again. “I can't hear a word!” I said angrily. “It's <b>none of your business</b>,” the young man said <b>rudely</b>. “This is a <b>private</b> conversation.”",
+        gist:"📖 段落大意：上周作者去剧院看戏，座位很好、戏也精彩，但身后一对男女一直大声说话。作者很生气，回头怒视他们却毫无作用，最后实在忍不住出言相劝，对方却粗鲁地回了一句「不关你的事，这是私人谈话」。" },
+      { type:"tips", cards:[
+        { ic:"🎭", t:"模仿语调", d:"跟读时模仿 Mike 的语调（抑扬顿挫），不要像念课文一样平铺直叙" },
+        { ic:"⏸️", t:"注意轻重缓急", d:"慢点来没关系，但要读出轻重和节奏感，像真的在说话" },
+        { ic:"🔁", t:"整段连贯", d:"逐句纠音后再连成整段读，每节课开头都会做热身朗读，好好开口" },
+        { ic:"💬", t:"积累地道表达", d:"It's none of your business / pay attention / could not bear it 都是口语高频" }
+      ]},
+      { type:"h3", text:"📚 本课新词汇 Vocabulary" },
+      { type:"vocab", words:[
+        { w:"article", ipa:"/ˈɑːtɪkl/", pos:"n.", mean:"文章", note:"learn from this article 从文章中学到" },
+        { w:"execute", ipa:"/ˈeksɪkjuːt/", pos:"v.", mean:"执行", note:"CEO = Chief Executive Officer 首席执行官；也可用 take action / follow the plan" },
+        { w:"project leader", ipa:"/ˈprɒdʒekt ˈliːdə(r)/", pos:"n.", mean:"项目负责人", note:"Who is the project leader?" },
+        { w:"in stock", ipa:"/ɪn stɒk/", pos:"phr.", mean:"有库存", note:"库存 = stock / storage；仓库 = warehouse" },
+        { w:"unit", ipa:"/ˈjuːnɪt/", pos:"n.", mean:"台，件（数量单位）", note:"How many units do you have in stock?" },
+        { w:"ship", ipa:"/ʃɪp/", pos:"v.", mean:"寄运，发货", note:"ship to + 地点；shipment n. 运输/一批货" },
+        { w:"warehouse", ipa:"/ˈweəhaʊs/", pos:"n.", mean:"仓库", note:"ship from China to the US warehouse" },
+        { w:"local market", ipa:"/ˈləʊkl ˈmɑːkɪt/", pos:"n.", mean:"当地市场", note:"What's your local market like?" },
+        { w:"contractor", ipa:"/kənˈtræktə(r)/", pos:"n.", mean:"承包商", note:"Mike 扮演的是泰国 contractor，开发游乐园项目" },
+        { w:"loader", ipa:"/ˈləʊdə(r)/", pos:"n.", mean:"装载机", note:"Shirley 目前主卖产品；铲土、装卸原料，区别于叉车 forklift" },
+        { w:"recommendation", ipa:"/ˌrekəmenˈdeɪʃn/", pos:"n.", mean:"推荐（意见）", note:"Do you have any recommendation? 有什么推荐？" },
+        { w:"place the order", ipa:"/pleɪs ði ˈɔːdə(r)/", pos:"phr.", mean:"下单", note:"expect to place the order 预计下单" },
+        { w:"break down", ipa:"/breɪk daʊn/", pos:"phr.", mean:"（机器）出故障", note:"= doesn't work = have some problems" },
+        { w:"suitable", ipa:"/ˈsuːtəbl/", pos:"adj.", mean:"适合的", note:"⚠️ 形容词只能用主系表：is suitable for，不能用 do/does" },
+        { w:"orchard", ipa:"/ˈɔːtʃəd/", pos:"n.", mean:"果园", note:"digging ditches in orchards 果园挖沟" },
+        { w:"prefer", ipa:"/prɪˈfɜː(r)/", pos:"v.", mean:"更倾向，更喜欢", note:"Which one do you prefer between A and B?" },
+        { w:"narrow", ipa:"/ˈnærəʊ/", pos:"adj.", mean:"狭窄的", note:"narrow spaces 狭窄空间（catalog 高频词）" }
+      ]},
+      { type:"h3", text:"❓ 语法精讲：特殊疑问句拆解三步法" },
+      { type:"grammar", formula:"疑问词 + 助动词 + 主语 + 动词（或表语）?",
+        intro:[
+          "⭐ 第一步锁<b>疑问词</b>：what / who / where / when / why / which / how；",
+          "⭐ 第二步选<b>助动词</b>：am / is / are / do / does（现在），过去时统一用 <b>did</b>；",
+          "⭐ 第三步放<b>主语</b>和其余部分。what 和 which 后面还可以加名词（what kind of / which product / which tractor model）。",
+          "💡 英语先说重点：What did you learn from this article?（学到什么先说）；中文反而把重点放后面——语序思维要切换。",
+          "💡 实义动词句用 do/does；形容词（如 suitable）和名词作主系表时只能用 am/is/are。",
+          "💡 去掉疑问词就是一般疑问句：Did you learn from this article?（你从这文章里学到东西了吗？）——两种句型会互相转换。"
+        ],
+        chipsTitle:"疑问词 5W1H",
+        chips:["what 什么","who 谁","where 哪里","when 何时","why 为什么","which 哪一个","how 怎样/程度"],
+        chips2Title:"助动词",
+        chips2:["do / does（实义动词现在时）","did（实义动词过去时）","am / is / are（be 动词/形容词句）"] },
+      { type:"h3", text:"✍️ 课堂中译英实战（答案已给出，遮住自测）" },
+      { type:"quiz", groups:[
+        { name:"🎯 基础造句（课堂实录原句）", items:[
+          { q:"这堂课你学到了什么？", hint:"learn from · class", a:"What did you learn from this class?",
+            tip:"💡 过去时 → 助动词用 did" },
+          { q:"谁和你一起上课的？", hint:"with", a:"Who are you with in this class? / Who did you go to the class with?",
+            tip:"💡 两个版本都对：are you with（状态）/ did you go with（动作）" },
+          { q:"你今天做了什么？", hint:"do today", a:"What did you do today?",
+            tip:"💡 课堂原句，Shirley 造对了 ✅" },
+          { q:"哪一种拖拉机的型号你最喜欢？", hint:"tractor model · best", a:"Which tractor model do you like best?",
+            tip:"💡 which + 名词 + do you like best = 问客户选型万能句" },
+          { q:"哪一种支付方式你最喜欢？", hint:"payment", a:"Which payment do you like best?",
+            tip:"💡 payment 支付条款——谈单必问" },
+          { q:"谁是项目负责人？", hint:"project leader", a:"Who is the project leader?",
+            tip:"💡 主语是第三人称单数 → 用 is（Shirley 答对了「三单」✅）" },
+          { q:"为什么我们不能按照计划去执行？", hint:"execute · as planned", a:"Why don't we execute the plan as planned?",
+            tip:"💡 否定疑问用 why don't；execute = 执行（CEO 的 E）；as planned = 按照计划" },
+          { q:"你昨天去了哪里？", hint:"yesterday", a:"Where did you go yesterday?",
+            tip:"💡 过去时 go → did you go" },
+          { q:"你是如何做到这件事的？", hint:"do it", a:"How did you do it?",
+            tip:"💡 how 不只问方式，见下方 HOW 家族专项" }
+        ]}
+      ]},
+      { type:"h3", text:"⚙️ HOW 家族专项：不只表示「怎样」，还表示程度 / 数量 / 距离 / 时间" },
+      { type:"grammar", formula:"How + 形容词/副词 + 一般疑问句语序?",
+        intro:[
+          "<b>How many</b> + 可数复数：How many books do you have?",
+          "<b>How much</b> + 不可数：How much water do you drink?",
+          "<b>How long</b>（多久/多长）：How long will you stay?",
+          "<b>How often</b>（频率）：How often do you travel?",
+          "<b>How soon</b>（多快）：How soon will he come back?",
+          "<b>How far</b>（多远，主系表）：How far is the station?",
+          "<b>How high / tall / deep / fast / big / old</b>：How tall is he? How deep is the river?",
+          "⚠️ 问「是多少」（参数）用 What is…；问「有多X」（程度）用 How + 形容词。"
+        ],
+        chipsTitle:"HOW 家族",
+        chips:["how many 多少(可数)","how much 多少(不可数)","how long 多久","how often 多频繁","how soon 多快","how far 多远","how high/tall 多高","how deep 多深","how fast 多快","how big 多大","how old 多大年纪"] },
+      { type:"h3", text:"💼 外贸实战 · 库存 / 物流 / 参数疑问句（课堂升级版原句）" },
+      { type:"quiz", groups:[
+        { name:"📦 库存与物流", items:[
+          { q:"你有多少库存？", hint:"units · in stock", a:"How many units do you have in stock?",
+            tip:"💡 库存 in stock；仓库 warehouse；storage 仓储" },
+          { q:"从中国寄到美国仓库有多远？", hint:"how far · ship to", a:"How far is it to ship from China to the US warehouse?",
+            tip:"💡 主系表结构用 is；it 指代货物/产品" },
+          { q:"你打算在中国待多久？", hint:"will · stay", a:"How long will you stay in China?",
+            tip:"💡 将来时 will + 动词原形" }
+        ]},
+        { name:"🔧 产品参数与售后", items:[
+          { q:"这台 HW-10 的最大挖掘深度是多少？", hint:"maximum digging depth", a:"What is the maximum digging depth of the HW-10?",
+            tip:"💡 参数万能公式：What is the + 参数名 + of + 型号？" },
+          { q:"如果机器出故障，我们应该联系谁？", hint:"if · break down · contact", a:"Who should we contact if the machine breaks down?",
+            tip:"💡 if 引导条件句（超纲先学）；break down = 出故障；contact 联系" },
+          { q:"这款迷你挖掘机能在哪些狭窄空间作业？", hint:"where can · narrow spaces", a:"Where can this mini excavator work in narrow spaces?",
+            tip:"💡 can 情态动词下节课细讲；narrow 狭窄的（catalog 高频词）" },
+          { q:"你预计什么时候下单？", hint:"expect to · place the order", a:"When do you expect to place the order?",
+            tip:"💡 do you expect（不是 will expect——do 已含疑问助动词）；place the order 下单" },
+          { q:"为什么 HW-10 特别适合果园挖沟？", hint:"suitable for · digging ditches", a:"Why is the HW-10 especially suitable for digging ditches in orchards?",
+            tip:"💡 suitable 是形容词 → 只能 is suitable for，不能用 do/does" },
+          { q:"HW-10 和 HW-15 之间，你更倾向哪一款？", hint:"prefer · between A and B", a:"Which one do you prefer between the HW-10 and the HW-15?",
+            tip:"💡 which one + do you prefer + between A and B = 二选一推荐话术" }
+        ]}
+      ]},
+      { type:"h3", text:"🧳 情景对话：外国客户到访公司 · 接待 + 需求挖掘" },
+      { type:"convo", turns:[
+        { who:"Shirley", en:"Hello Mike, how are you doing?", cn:"你好 Mike，最近怎么样？", note:"⭐ 见面先打招呼，不要上来就甩问题" },
+        { who:"Mike", en:"I'm fantastic. I just came to China — this is my first day. It's good to be here.", cn:"挺好的。我刚来中国，这是第一天，很高兴来到这里。" },
+        { who:"Shirley", en:"What do you have arranged in China? Is there anything I can help?", cn:"您在中国有什么安排？有什么我可以帮忙的吗？", note:"💡 arranged 安排；先问需求，让客户说" },
+        { who:"Mike", en:"I'm looking for a loader. You know why? I'm a contractor. I got a project to develop an amusement park, so I need loaders to improve our efficiency.", cn:"我在找装载机。知道为什么吗？我是承包商，拿到一个游乐园开发项目，需要装载机来提高效率。" },
+        { who:"Shirley", en:"Why do you need this machine?", cn:"您为什么需要这款机器？", note:"💡 问 why 挖动机，客户会告诉你市场背景" },
+        { who:"Mike", en:"In our country, Thailand, there are few manufacturers that can make this product. I heard China has good suppliers. Also our country is developing, so it's a good time to open the market.", cn:"我们泰国很少有厂家能生产这个产品。听说中国有好的供应商。而且我们国家正在发展，正是开拓市场的好时机。" },
+        { who:"Shirley", en:"Which tractor model do you like best? Do you have any recommendation?", cn:"您最喜欢哪一款型号？有什么推荐吗？", note:"🎯 遇到不懂的型号别慌，反问客户让他推荐" },
+        { who:"Mike", en:"Actually I'm not professional about that. My ground is about 100 square meters. Do you have any recommendation?", cn:"其实我不太懂。我的场地大概 100 平方米。你有什么推荐吗？" },
+        { who:"Shirley", en:"When will you go back to your country?", cn:"您什么时候回国？", note:"💡 聊完业务自然收尾，为后续跟进铺垫" },
+        { who:"Mike", en:"Next week. I'll stay here seven days and then go back.", cn:"下周。我在这里待七天就回去。" }
+      ]},
+      { type:"h3", text:"💡 课堂技巧总结（Mike 经验谈）" },
+      { type:"tips", cards:[
+        { ic:"😌", t:"别怕犯错", d:"语法没捋清楚才会卡；拆碎了三步走，慢也能说对" },
+        { ic:"✂️", t:"做减法", d:"很多老外客户英语也不好，能表达意思就行，简化它，来回扯反而增进感情" },
+        { ic:"👂", t:"听不懂客户怎么办", d:"先用一般疑问句确认（yes/no 引导），靠行业经验猜意思；还不行就直接翻译，不尴尬" },
+        { ic:"🤝", t:"有方案 > 不出错", d:"出了小问题但你有解决方案，客户反而觉得这个业务靠谱" },
+        { ic:"🏗️", t:"Mike 不只教英语", d:"还教怎么谈单——口语好了老板才会带你接待客户，机会更多" },
+        { ic:"📞", t:"目前没接待过客户", d:"都是线上沟通；同事口语好的接待多——继续练，机会会来的" }
+      ]},
+      { type:"h3", text:"📌 课后任务 & 课程路线图" },
+      { type:"tasks", list:[
+        { ic:"📝", t:"复习本课中译英 20 句", d:"遮住答案自测，尤其是 HOW 家族和升级版参数疑问句" },
+        { ic:"🎧", t:"朗读热身课文 3 遍", d:"模仿语调读出轻重缓急，录下来对比原音" },
+        { ic:"📚", t:"每天单词打卡", d:"坚持发截图给 Mike" },
+        { ic:"🗺️", t:"下节课：情态动词", d:"用 can / could / would 把疑问句问得更委婉客气" },
+        { ic:"📖", t:"第 3–4 节课：陈述句", d:"学会怎么「说」，用并列句把内容粘起来" },
+        { ic:"🎯", t:"第 5 节课：综合实战", d:"疑问句 + 陈述句综合运用，快速开口" }
+      ]}
+    ]
+  }
+
+  /* 👇 新课时复制从这里开始 👇
+  ,{
+    id: 3,
+    label: "正式课 · 第 2 节",
+    title: "第 2 节 · ……",
+    date: "2026-10-21",
     summary: "……",
     sections: [ ... ]
   }
@@ -261,7 +464,7 @@ function renderNav(activeId){
   nav.innerHTML = LESSONS.map(l => `
     <a class="lesson-link ${l.id===activeId?'active':''}" href="#/lesson/${l.id}">
       <span class="lesson-num">${l.id}</span>
-      <span class="lesson-name">${l.title.split('·')[0].trim().slice(0,14)}</span>
+      <span class="lesson-name">${l.label || ('Lesson '+l.id)}</span>
       <span class="lesson-date">${l.date.slice(5).replace('-','/')}</span>
     </a>`).join('');
 }
@@ -295,6 +498,18 @@ function renderLesson(l){
           if(b.chips){ inner += `<div style="font-size:13px;color:var(--sub);margin-top:10px">${b.chipsTitle}</div><div class="chips">${b.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div>`; }
           if(b.chips2){ inner += `<div style="font-size:13px;color:var(--sub);margin-top:4px">${b.chips2Title}</div><div class="chips">${b.chips2.map(c=>`<span class="chip">${c}</span>`).join('')}</div>`; }
         }
+        if(b.type==="quiz"){
+          b.groups.forEach(g=>{
+            inner += `<div class="quiz-group">${g.name}</div>`;
+            inner += g.items.map(it=>`
+              <div class="quiz"><div class="q">📝 ${it.q}</div>
+              ${it.hint?`<div class="hint">提示：${it.hint}</div>`:''}
+              <details open><summary></summary>
+                <div class="a"><div class="en">✅ ${it.a}</div>
+                ${it.tip?`<div class="tip">${it.tip}</div>`:''}</div>
+              </details></div>`).join('');
+          });
+        }
         if(b.type==="examples") inner += b.list.map(e=>`
           <div class="ex"><div class="en">${e.en}</div><div class="cn">${e.cn||''}</div>
           ${e.tip?`<div class="tip" style="margin:8px 0 0">${e.tip}</div>`:''}</div>`).join('');
@@ -312,7 +527,7 @@ function renderLesson(l){
     } else { i++; }
   }
   document.getElementById('content').innerHTML = `
-    <div class="lesson-kicker">LESSON ${l.id}</div>
+    <div class="lesson-kicker">${l.label || ('LESSON '+l.id)}</div>
     <h2 class="page-title">${l.title}</h2>
     <div class="meta"><span>📅 ${l.date}</span><span>👨‍🏫 ${l.teacher||'Mike 老师'}</span><span>👤 ${l.student||'Shirley'}</span></div>
     <div class="summary">${l.summary||''}</div>
