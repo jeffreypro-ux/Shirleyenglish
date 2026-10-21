@@ -542,7 +542,7 @@ const LESSONS = [
     date: "2026-10-20",
     teacher: "Mike 老师",
     student: "Shirley",
-    summary: "日常寒暄闲聊表达 · 新概念课文《Tony's Dinner》朗读 · 停顿规则 · 一重一轻 · 辅音+元音连读与弱读",
+    summary: "寒暄闲聊表达 · 课文朗读（停顿/轻重/连读）· 5W1H 复习 · 一般疑问句+情态动词精讲 · 中译英 16 句 · 由浅到深提问实战",
     sections: [
       { type:"h3", text:"🌅 课前寒暄 Small Talk（每节课前 5 分钟瞎聊）" },
       { type:"dialog", lines:[
@@ -609,16 +609,105 @@ const LESSONS = [
             tip:"💡 could 表委婉，外贸请求标配" }
         ]}
       ]},
+      { type:"h3", text:"📚 补充词汇（业务高频）" },
+      { type:"vocab", words:[
+        { w:"rated load capacity", ipa:"/ˈreɪtɪd ləʊd kəˈpæsəti/", pos:"n.", mean:"额定载重", note:"What rated load capacity do you need? 问客户需求必备" },
+        { w:"forwarder", ipa:"/ˈfɔːwədə(r)/", pos:"n.", mean:"货代（货运代理）", note:"Do you have a forwarder? 你们有货代吗" },
+        { w:"distributor", ipa:"/dɪˈstrɪbjətə(r)/", pos:"n.", mean:"经销商", note:"Are you a distributor? 您是经销商吗" },
+        { w:"quotation", ipa:"/kwəʊˈteɪʃn/", pos:"n.", mean:"报价（单）", note:"compare the quotations 对比报价" },
+        { w:"maintain", ipa:"/meɪnˈteɪn/", pos:"v.", mean:"保养，维护", note:"be maintained 被保养（被动语态）" },
+        { w:"deliver", ipa:"/dɪˈlɪvə(r)/", pos:"v.", mean:"交付，发货", note:"这批货能发吗 Will you ship / deliver the goods" },
+        { w:"in charge of", ipa:"/ɪn tʃɑːdʒ əv/", pos:"phr.", mean:"负责", note:"the salesperson in charge of loader exports；名词化比用动词更地道" },
+        { w:"do me a favor", ipa:"/duː mi ə ˈfeɪvə(r)/", pos:"phr.", mean:"帮我一个忙", note:"Could you do me a favor? 比 Can you help me 更地道" },
+        { w:"factory tour", ipa:"/ˈfæktri tʊə(r)/", pos:"n.", mean:"验厂；参观工厂", note:"a video factory tour 视频验厂" },
+        { w:"payment terms", ipa:"/ˈpeɪmənt tɜːmz/", pos:"n.", mean:"付款方式", note:"Which payment terms would you prefer?" },
+        { w:"diesel-powered", ipa:"/ˈdiːzl ˈpaʊəd/", pos:"adj.", mean:"柴油动力的", note:"Is this loader diesel powered?" },
+        { w:"compare", ipa:"/kəmˈpeə(r)/", pos:"v.", mean:"比较，对比", note:"compare the quotations first 先对比报价" }
+      ]},
+      { type:"h3", text:"🔁 开课复习 · 5W1H 快问快答（课堂原句）" },
+      { type:"quiz", groups:[
+        { name:"🎯 上一课句型复习", items:[
+          { q:"你有多少库存？", hint:"units · in stock", a:"How many units do you have in stock?", tip:"💡 课堂复习原句" },
+          { q:"从中国寄去美国仓库有多远？", hint:"how far · ship", a:"How far is it to ship from China to the US warehouse?", tip:"💡 这次的答案更完整 ✅" },
+          { q:"你会在中国待多久？", hint:"how long · will", a:"How long will you stay in China?", tip:"💡" },
+          { q:"这台 HW-10 的最大挖掘深度是多少？", hint:"maximum digging depth", a:"What is the maximum digging depth of the HW-10?", tip:"💡 自己拆出来的：what + is + 参数 ✅" },
+          { q:"您预计什么时候下单？", hint:"expect to · place the order", a:"When do you expect to place the order?", tip:"💡 课堂原句，已流利 ✅" }
+        ]}
+      ]},
+      { type:"h3", text:"🧳 情景对话实战 · 挖掘客户需求（Mike 扮演客户）" },
+      { type:"convo", turns:[
+        { who:"Shirley", en:"How are you?", cn:"您好，最近怎么样？", note:"先寒暄" },
+        { who:"Mike", en:"Good! How are you doing?", cn:"挺好的，你呢？" },
+        { who:"Shirley", en:"What rated load capacity do you need for the machine?", cn:"您需要多大额定载重的机器？", note:"⭐ rated load capacity 额定载重——问需求的专业表达" },
+        { who:"Mike", en:"Sorry, what do you mean?", cn:"不好意思，您是指？", note:"💡 客户没听懂很正常，用 Do you mean…? 确认就好" },
+        { who:"Shirley", en:"It's the maximum loading ability — for example, one ton or two tons.", cn:"就是最大装载能力，比如一吨、两吨。" },
+        { who:"Mike", en:"I think maybe the maximum is ten tons.", cn:"大概最大十吨吧。" },
+        { who:"Shirley", en:"When do you expect to place your order?", cn:"您预计什么时候下单？", note:"💡 挖交易进度" },
+        { who:"Mike", en:"This month I'll select some suppliers and compare the quotations first. Next month I will make a decision to place the order.", cn:"这个月我先筛选供应商、对比报价，下个月决定下单。" },
+        { who:"Shirley", en:"Why do you need this machine?", cn:"您为什么需要这款机器？", note:"💡 问 why 挖市场背景" },
+        { who:"Mike", en:"Our city is developing. The government opens building projects, so many contractors need machines. I'm a distributor — I need to find customers who need the loaders.", cn:"我们城市在发展，政府开放了很多建筑项目，承包商都需要机器。我是经销商，要找需要装载机的客户。" },
+        { who:"Shirley", en:"What is your local market like?", cn:"您的当地市场是什么样的？", note:"💡 local market 当地市场——了解客户国情" },
+        { who:"Mike", en:"We have money, but we don't have machines. So the market is huge.", cn:"我们有钱，但没有机器。所以市场很大。" }
+      ]},
+      { type:"h3", text:"⚠️ Mike 点评 · 提问要由浅到深" },
+      { type:"tips", cards:[
+        { ic:"📶", t:"问题顺序：由浅到深", d:"寒暄（how are you）→ 需求（what do you need）→ 交易（when order / payment）。浅了突然很深，客户反应不过来" },
+        { ic:"🧠", t:"造句前先捋中文", d:"先想清楚中文要表达什么 → 主语是谁 → 再选助动词。主语不是第一个词" },
+        { ic:"⏱️", t:"How long ≠ How often", d:"how long 问时长（待多久），how often 问频率（多久一次）：How often should this loader be maintained?" },
+        { ic:"😌", t:"大致意思 get 到就行", d:"说错了别怕：Mike 故意挖坑的题都允许错，老外能 get 到意思就成功" }
+      ]},
+      { type:"h3", text:"❓ 语法精讲 · 一般疑问句 + 情态动词" },
+      { type:"grammar", formula:"助动词 / 情态动词 / be 动词 + 主语 + 动词原形？",
+        intro:[
+          "<b>情态动词 = 情 + 态</b>：情=情绪价值（委婉、客气），态=时态（will 表将来）。",
+          "<b>can / could</b> 能不能（could 更客气）；<b>will</b> 会不会/将要；<b>would</b> 愿不愿意；<b>shall we</b> 我们要不要（提建议，只配 I/we）；<b>should</b> 应该。",
+          "⭐ 口语里说好了情态动词就已经很溜——大部分老外日常也这么用，不需要太复杂的句型。",
+          "⚠️ 主语变了句子跟着变：「这批货下个月能发吗」货不能自己发 → <b>Will you ship the goods next month?</b>（被动式 Will these goods be delivered… 超纲，知道即可）",
+          "⚠️ 看清题型：「您更倾向于哪种付款方式」是<b>特殊疑问句</b>（what/which 开头），情态动词跟在后面：Which payment terms would you prefer?"
+        ],
+        chipsTitle:"一般疑问句开头词速查",
+        chips:["Am I…?","Is this/it…?","Are these/you…?","Do you/we…?","Does he/she…?","Can you…?","Could you…?","Will you…?","Would you…?","Should I…?","Shall we…?"] },
+      { type:"h3", text:"✍️ 中译英练习 · 一般疑问句 & 情态动词（课堂 16 句）" },
+      { type:"quiz", groups:[
+        { name:"🔵 be 动词 / do 组", items:[
+          { q:"我今天迟到了？", hint:"late · am I", a:"Am I late today?", tip:"💡 状态句用 be 动词，I 配 am" },
+          { q:"我是负责装载机出口的业务员，对吗？", hint:"in charge of · salesperson", a:"Am I the salesperson in charge of loader exports?", tip:"⭐ in charge of = 负责（名词化更地道）；中文重点「业务员」要提到前面" },
+          { q:"这台冰箱是新买的吗？", hint:"fridge", a:"Is this fridge new?", tip:"💡 new 已含「新买的」意思，不用再加 just bought" },
+          { q:"这台装载机是柴油动力的吗？", hint:"diesel powered", a:"Is this loader diesel powered?", tip:"💡 你的专业领域词，课堂已说对 ✅" },
+          { q:"这些装载机都是现货吗？", hint:"in stock", a:"Are these loaders in stock?", tip:"💡 复数主语 these loaders 配 are" },
+          { q:"你们有合作的货代吗？", hint:"forwarder", a:"Do you have a forwarder?", tip:"💡 货代 forwarder——发货必备伙伴" },
+          { q:"您是经销商吗？", hint:"distributor / looking for", a:"Are you a distributor? / Are you looking for loaders?", tip:"💡 两个版本都行，第二句更自然" }
+        ]},
+        { name:"🟠 情态动词组", items:[
+          { q:"我应该早点到机场吗？", hint:"should · arrive", a:"Should I arrive at the airport early?", tip:"💡 arrive at + 机场；get to 也可以" },
+          { q:"这台装载机应该多久保养一次？", hint:"how often · maintained", a:"How often should this loader be maintained?", tip:"⭐ how often 问频率；这台机器是「被保养」用 be maintained" },
+          { q:"您能帮我一个忙吗？", hint:"do me a favor", a:"Could you do me a favor?", tip:"💡 比 Can you help me 更地道" },
+          { q:"您能发一份装载机的产品目录给我吗？", hint:"could you send", a:"Could you send me your loader catalog?", tip:"💡 send me sth = send sth to me 两种都行" },
+          { q:"你周末来参加聚会吗？", hint:"will", a:"Will you come to the party this weekend?", tip:"💡" },
+          { q:"这批货下个月能发吗？", hint:"will you ship", a:"Will you ship the goods next month?", tip:"⭐ 货不能自己发动作，主语用 you；说 Will you deliver 也对" },
+          { q:"我们今晚吃什么？", hint:"shall we", a:"What shall we eat tonight?", tip:"💡 shall 提建议，只配 I/we" },
+          { q:"要不我们安排一次视频验厂吧？", hint:"arrange · factory tour", a:"Shall we arrange a video factory tour?", tip:"💡 推进业务的地道收尾句" },
+          { q:"你想喝杯咖啡吗？", hint:"would you like", a:"Would you like a cup of coffee?", tip:"💡 would like = 想要，最客气的说法" },
+          { q:"您更倾向于哪种付款方式？", hint:"prefer · payment terms", a:"Which payment terms would you prefer?", tip:"⚠️ 特殊疑问句：which 开头，would 随后；what kind of payment 也行" }
+        ]}
+      ]},
+      { type:"h3", text:"🎯 造句实战 · 由浅到深八连问（开口词提示）" },
+      { type:"tips", cards:[
+        { ic:"🗝️", t:"开口词提示", d:"Do you have…?（有没有）/ Do you want…?（想不想）/ Is there…?（有没有…东西）/ Are you…?（是不是）/ Have you…?（有没有做过）" },
+        { ic:"🟢", t:"浅层例句", d:"Do you have a forwarder? / Are you a distributor? / Have you been to China?（您来过中国吗）" },
+        { ic:"🟡", t:"中层例句", d:"Is there any product you want to look? / Have you brought your company introduction?（带公司简介了吗）" },
+        { ic:"🔴", t:"深层例句", d:"What rated load capacity do you need for the machine?——专业问题放最后" }
+      ]},
       { type:"h3", text:"📌 课后任务" },
       { type:"tasks", list:[
-        { ic:"🎧", t:"朗读课文 3 遍 + 录音", d:"重点练 pays it back 连读弱读、but 轻主语重，录音对比 Mike 的示范" },
-        { ic:"💬", t:"用寒暄句编一段 30 秒独白", d:"How do you do today → as casual → nothing special → between work and home，连贯说出来" },
-        { ic:"📝", t:"每天单词打卡", d:"截图发给 Mike" },
-        { ic:"⚠️", t:"本节课后段待补充", d:"本份课堂记录至「复习环节」为止；一般疑问句精讲部分整理后会补充到本页" }
+        { ic:"🎤", t:"录音作业（明天交）", d:"造句：一般疑问句 ≥2 句 + 情态动词 ≥2 句，由浅到深，按公司实际造，要能下次直接用的，录成音频发给 Mike" },
+        { ic:"🎭", t:"下节课实战模拟", d:"Mike 扮演客户，用你自己造的句子现场对话" },
+        { ic:"📅", t:"下周起一周两节课", d:"正式进入每周 2 次课的节奏" },
+        { ic:"📚", t:"明天开始背单词", d:"先背日常简单词、每天朗读；Mike 上课会用到这些词提醒你——读过就能用上，用一次就记住了" },
+        { ic:"💪", t:"同步短板", d:"专业领域单词「看得懂但反应不过来」→ 日常词 + 专业词双线打卡" }
       ]}
     ]
   }
-
   /* 👇 新课时复制从这里开始 👇
   ,{
     id: 4,
