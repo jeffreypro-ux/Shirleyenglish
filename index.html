@@ -110,17 +110,57 @@
   .quiz .a .cn{color:var(--sub);font-size:13px}
   .quiz .a .tip{margin:6px 0 0;font-size:12.5px}
   .footer{color:var(--sub)};font-size:12.5px;text-align:center;padding:26px 0}
+  .menu-btn{display:none}
+  .overlay{display:none}
   @media (max-width:860px){
-    .sidebar{position:static;width:100%;height:auto}
-    .layout{flex-direction:column}
-    .main{margin-left:0;padding:24px 16px}
+    .sidebar{position:fixed;width:264px;height:100%;transform:translateX(-105%);transition:transform .25s ease;z-index:60;box-shadow:4px 0 18px rgba(0,0,0,.25)}
+    .sidebar.open{transform:translateX(0)}
+    .menu-btn{display:flex;position:fixed;top:12px;left:12px;z-index:70;width:42px;height:42px;border:none;border-radius:11px;background:var(--dark);color:#fff;font-size:20px;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+    .overlay{display:block;position:fixed;inset:0;background:rgba(20,17,13,.45);z-index:55;opacity:0;pointer-events:none;transition:opacity .2s}
+    .overlay.show{opacity:1;pointer-events:auto}
+    .main{margin-left:0;padding:66px 14px 20px;max-width:100%}
+    .card{padding:18px 16px;margin-bottom:14px;border-radius:14px}
+    .card h3{font-size:16px}
+    .hero{padding:14px 0 6px}
+    .hero .book{font-size:32px}
+    .hero h1{font-size:23px}
+    .hero p{font-size:14px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0 26px}
+    .stat{padding:12px 6px;min-width:0;text-align:center}
+    .stat b{font-size:19px}
+    .stat div{font-size:11.5px}
+    h2.page-title{font-size:20px}
+    .lesson-kicker{font-size:12px}
+    .meta{gap:6px;margin:10px 0 18px}
+    .meta span{font-size:12px;padding:3px 10px}
+    .summary{font-size:13px;margin:4px 0 20px}
     .tips-grid{grid-template-columns:1fr}
-    .word{flex-wrap:wrap}
+    .word{flex-wrap:wrap;gap:4px 10px}
+    .word .w{min-width:0}
+    .word .mean{font-size:14px}
+    .reading{font-size:14.5px;padding:14px;line-height:1.95}
+    .turn .who{width:46px;font-size:12px}
+    .turn .bubble{padding:9px 12px}
+    .turn .bubble .en{font-size:14.5px}
+    .expr{flex-direction:column;gap:2px}
+    .expr .p{min-width:0}
+    .formula{font-size:12.5px;padding:12px 14px;text-align:left}
+    .chip{font-size:12px;padding:4px 11px}
+    .ex .en{font-size:14.5px}
+    .quiz .q{font-size:14.5px}
+    .quiz .a{font-size:14px}
+    .lesson-link{padding:12px}
+    .task b{font-size:14px}
+    .line .en{font-size:14.5px}
+    .footer{padding-bottom:44px}
+    .lesson-link.active{font-weight:600}
   }
 </style>
 <base target="_blank">
 </head>
 <body>
+<button class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 <div class="layout">
   <aside class="sidebar">
     <div class="brand">Shirley <span>英语口语</span></div>
@@ -432,6 +472,57 @@ const LESSONS = [
         { ic:"🏗️", t:"Mike 不只教英语", d:"还教怎么谈单——口语好了老板才会带你接待客户，机会更多" },
         { ic:"📞", t:"目前没接待过客户", d:"都是线上沟通；同事口语好的接待多——继续练，机会会来的" }
       ]},
+      { type:"h3", text:"🧪 助动词 & 情态动词中译英：每词 2 句（日常 1 句 + 装载机业务 1 句）" },
+      { type:"quiz", groups:[
+        { name:"🔗 AM / IS / ARE（be 动词 · 状态/属性）", items:[
+          { q:"【日常】你明天有空吗？", hint:"free · tomorrow", a:"Are you free tomorrow?",
+            tip:"💡 主语是 you → 用 are" },
+          { q:"【业务】这台装载机是柴油动力的吗？", hint:"diesel-powered", a:"Is this loader diesel-powered?",
+            tip:"💡 主语是 the loader（三单物品）→ 用 is" }
+        ]},
+        { name:"🧭 SHOULD（应该 · 征求建议）", items:[
+          { q:"【日常】我现在应该出发了吗？", hint:"leave · now", a:"Should I leave now?",
+            tip:"💡 should + 动词原形，不分人称" },
+          { q:"【业务】我们应该给客户发产品目录吗？", hint:"send · catalog", a:"Should we send the catalog to the client?",
+            tip:"💡 send sth. to sb. 把某物发给某人" }
+        ]},
+        { name:"🙏 COULD（能……吗 · 委婉请求）", items:[
+          { q:"【日常】你能帮我一个忙吗？", hint:"do sb. a favor", a:"Could you do me a favor?",
+            tip:"💡 比 can 更客气；do me a favor 帮我个忙" },
+          { q:"【业务】您能告诉我您的使用场景吗？", hint:"working conditions", a:"Could you tell me your working conditions?",
+            tip:"💡 working conditions 工况/使用场景——挖需求必问" }
+        ]},
+        { name:"🔮 WILL（将要 · 未来动作）", items:[
+          { q:"【日常】你明天会来参加聚会吗？", hint:"come to · party", a:"Will you come to the party tomorrow?",
+            tip:"💡 will + 动词原形，疑问句 will 提前" },
+          { q:"【业务】您下个月会下单吗？", hint:"place the order", a:"Will you place the order next month?",
+            tip:"💡 place the order 下单——催单跟进高频句" }
+        ]},
+        { name:"🤝 SHALL（……好吗 · 提建议，只用于 I/We）", items:[
+          { q:"【日常】我们今晚出去吃饭好吗？", hint:"eat out", a:"Shall we eat out tonight?",
+            tip:"💡 ⚠️ shall 只能用于 I / we" },
+          { q:"【业务】我们安排一次线上会议好吗？", hint:"arrange · online meeting", a:"Shall we arrange an online meeting?",
+            tip:"💡 推进合作的标准收尾建议" }
+        ]},
+        { name:"💼 WOULD（想要……吗 · 最委婉的邀请）", items:[
+          { q:"【日常】你想喝点咖啡吗？", hint:"would like", a:"Would you like some coffee?",
+            tip:"💡 Would you like…? 比 Do you want…? 客气得多" },
+          { q:"【业务】您想看看我们的装载机产品目录吗？", hint:"loader · catalog", a:"Would you like to see our loader catalog?",
+            tip:"💡 客户参观/线上沟通收尾必备句" }
+        ]},
+        { name:"✅ DO（实义动词现在时 · 主语非三单）", items:[
+          { q:"【日常】你喜欢这道菜吗？", hint:"dish", a:"Do you like this dish?",
+            tip:"💡 主语 you → 用 do" },
+          { q:"【业务】你们接受电汇付款吗？", hint:"accept · T/T payment", a:"Do you accept T/T payment?",
+            tip:"💡 T/T (Telegraphic Transfer) 电汇——外贸付款方式必问" }
+        ]},
+        { name:"✅ DOES（实义动词现在时 · 主语第三人称单数）", items:[
+          { q:"【日常】她每天都锻炼身体吗？", hint:"exercise", a:"Does she exercise every day?",
+            tip:"💡 三单 she → 用 does，动词 exercise 用原形" },
+          { q:"【业务】这款装载机配备空调驾驶室吗？", hint:"come with · air-conditioned cabin", a:"Does this loader come with an air-conditioned cabin?",
+            tip:"💡 come with 配备有……；空调驾驶室是装载机卖点配置" }
+        ]}
+      ]},
       { type:"h3", text:"📌 课后任务 & 课程路线图" },
       { type:"tasks", list:[
         { ic:"📝", t:"复习本课中译英 20 句", d:"遮住答案自测，尤其是 HOW 家族和升级版参数疑问句" },
@@ -444,12 +535,96 @@ const LESSONS = [
     ]
   }
 
-  /* 👇 新课时复制从这里开始 👇
   ,{
     id: 3,
     label: "正式课 · 第 2 节",
-    title: "第 2 节 · ……",
-    date: "2026-10-21",
+    title: "第 2 节 · 寒暄表达 + 朗读节奏训练（停顿 / 轻重 / 连读）",
+    date: "2026-10-20",
+    teacher: "Mike 老师",
+    student: "Shirley",
+    summary: "日常寒暄闲聊表达 · 新概念课文《Tony's Dinner》朗读 · 停顿规则 · 一重一轻 · 辅音+元音连读与弱读",
+    sections: [
+      { type:"h3", text:"🌅 课前寒暄 Small Talk（每节课前 5 分钟瞎聊）" },
+      { type:"dialog", lines:[
+        { en:"How do you do today? / How are you doing?", cn:"你今天过得怎么样？", tip:"⭐ 寒暄开场第一句，比 Hello 更有温度" },
+        { en:"Sounds like you're so happy today.", cn:"听起来你今天心情不错呀。", tip:"💡 sounds like… 听起来……——对客户也能用：Sounds like you had a busy week." },
+        { en:"Just as casual.", cn:"跟往常一样。", tip:"⭐ casual 本义=随意的；as casual / as usual 都可以表示「老样子」" },
+        { en:"Go to work, off work and back to home.", cn:"上班、下班、然后回家。", tip:"💡 上班 go to work；下班 off work（比 get off work 更常用）；回家 back home（to 可省）" },
+        { en:"It's just between work and home.", cn:"就是公司和家两点一线。", tip:"⭐ between A and B：在 A 和 B 之间——「两点一线」的地道说法" },
+        { en:"Nothing special.", cn:"没什么特别的。", tip:"💡 老外互相吐槽日常、拉近距离的神句" }
+      ]},
+      { type:"tips", cards:[
+        { ic:"💬", t:"寒暄就是拉近距离", d:"老外也上班下班、也爱吐槽工作——闲聊越自然，客户关系越近" },
+        { ic:"🔄", t:"每节课前 5 分钟瞎聊", d:"不懂的词 Mike 会当场教，日积月累都是口语素材" },
+        { ic:"😌", t:"日常≠无聊", d:"casual / nothing special / between work and home 三个表达记住就能聊" }
+      ]},
+      { type:"h3", text:"📚 本课新词汇 Vocabulary" },
+      { type:"vocab", words:[
+        { w:"casual", ipa:"/ˈkæʒuəl/", pos:"adj.", mean:"随意的；平常的", note:"as casual / as usual 跟往常一样" },
+        { w:"between A and B", ipa:"/bɪˈtwiːn/", pos:"phr.", mean:"在 A 和 B 之间", note:"two-point line：between work and home 两点一线" },
+        { w:"nothing special", ipa:"/ˈnʌθɪn ˈspeʃl/", pos:"phr.", mean:"没什么特别的", note:"寒暄高频回答" },
+        { w:"restaurant", ipa:"/ˈrestrɒnt/", pos:"n.", mean:"餐馆", note:"at a restaurant 在餐馆" },
+        { w:"lawyer's office", ipa:"/ˈlɔɪəz ˈɒfɪs/", pos:"n.", mean:"律师事务所", note:"work in a lawyer's office" },
+        { w:"salary", ipa:"/ˈsæləri/", pos:"n.", mean:"薪水", note:"get a good salary 薪水不错" },
+        { w:"borrow", ipa:"/ˈbɒrəʊ/", pos:"v.", mean:"（向别人）借入", note:"borrow money from friends 向朋友借钱" },
+        { w:"lend", ipa:"/lend/", pos:"v.", mean:"（借给）借出", note:"lend me 20 pounds 借我20英镑（不规则动词 lent）" },
+        { w:"pay back", ipa:"/peɪ bæk/", pos:"phr.", mean:"还钱；回报", note:"never pays it back 从不还钱 ⭐本课连读训练句" },
+        { w:"to my surprise", ipa:"/tə maɪ səˈpraɪz/", pos:"phr.", mean:"令我惊讶的是", note:"to one's surprise 令某人惊讶的是" },
+        { w:"immediately", ipa:"/ɪˈmiːdiətli/", pos:"adv.", mean:"立刻，马上", note:"= at once" }
+      ]},
+      { type:"h3", text:"🗣️ 热身朗读材料 · Tony's Dinner（新概念经典课文节选）" },
+      { type:"reading", text:"I was having dinner at a restaurant when Tony Steele came in. Tony worked in a <b>lawyer's office</b> years ago, but he is now working at a bank. He gets a good <b>salary</b>, but he always <b>borrows money</b> from his friends and never <b>pays it back</b>. Tony saw me and came and sat at the same table. He has never borrowed money from me. While he was eating, I asked him to <b>lend</b> me twenty pounds. <b>To my surprise</b>, he gave me the money <b>immediately</b>. “I have never borrowed any money from you,” Tony said, “so now you can pay for my dinner!”",
+        gist:"📖 段落大意：作者在餐厅吃饭时碰到 Tony Steele——他过去在律师事务所工作，如今在银行上班、薪水不错，却总向朋友借钱从不归还。Tony 过来同坐，吃饭时作者向他借 20 英镑，没想到他立刻掏了钱，还说：“我可从来没跟你借过钱，所以这顿你请！”" },
+      { type:"h3", text:"🎵 朗读技巧精讲（本课核心训练）" },
+      { type:"tips", cards:[
+        { ic:"⏸️", t:"先学会停，才会快", d:"句号必停；逗号停一停；主谓宾成分之间停。中文说话不这样，英语必须停" },
+        { ic:"⚖️", t:"一重一轻", d:"一个句子只有一个重点，读重读慢；其余全部压小音量——抑扬顿挫的关键" },
+        { ic:"🚫", t:"but 不要重读", d:"but 弱读带过，反而要拉高后面的主语：but HE always…" },
+        { ic:"🔗", t:"连读规则：辅音+元音", d:"pays it back → pay-si-tback；never pays it back 连读 + 弱读，音量降下来" },
+        { ic:"🐢", t:"慢是快的前提", d:"刚开始都讲快，但要先慢下来把停顿、轻重练对，快才有意义" },
+        { ic:"🎤", t:"女生嗓音可以用" , d:"女声可以自然尖细一点，不用刻意压低；always / kiss 这类词拉高会更好听" }
+      ]},
+      { type:"grammar", formula:"停顿：句号 ≫ 逗号 > 成分间　|　节奏：一个句子，一个重点",
+        intro:[
+          "例句拆解：<b>I was having dinner</b>（主谓宾，重）at a restaurant（修饰，轻）| <b>when Tony Steele came in</b>（重点，重）",
+          "but he <b>ALWAYS</b> borrows money（重点在 always）from his friends（轻）and（停一停）never <b>PAYS it BACK</b>",
+          "连读+弱读示范：never pays it back → /ˈnevə peɪ zɪt ˈbæk/，pays 尾音 /z/ 直接滑进 it"
+        ],
+        chipsTitle:"本课连读练习词组",
+        chips:["pays it back 还钱","borrows money 借钱","to my surprise 令我惊讶的是","at a restaurant 在餐馆"] },
+      { type:"h3", text:"✍️ 寒暄场景中译英（答案已给出）" },
+      { type:"quiz", groups:[
+        { name:"💬 日常寒暄", items:[
+          { q:"你今天过得怎么样？", hint:"how do you do / how are you doing", a:"How do you do today? / How are you doing?",
+            tip:"💡 两个都对，后者更口语" },
+          { q:"你听起来今天心情很好。", hint:"sounds like", a:"Sounds like you're so happy today.",
+            tip:"💡 对客户：Sounds like you had a busy week. 听起来您这周很忙" },
+          { q:"跟往常一样，上班下班，然后回家。", hint:"as casual · go to work · off work", a:"Just as casual — go to work, off work and back to home.",
+            tip:"💡 课堂原句升级版" },
+          { q:"没什么特别的，就是公司和家两点一线。", hint:"nothing special · between A and B", a:"Nothing special — just between work and home.",
+            tip:"⭐ between A and B 是「两点一线」的地道说法" },
+          { q:"你今晚有空吗？", hint:"free tonight（复习 am/is/are）", a:"Are you free tonight?",
+            tip:"💡 第二人称 you 配 are" },
+          { q:"你能发一下产品目录给我吗？", hint:"could · catalog（复习 could）", a:"Could you send me the catalog?",
+            tip:"💡 could 表委婉，外贸请求标配" }
+        ]}
+      ]},
+      { type:"h3", text:"📌 课后任务" },
+      { type:"tasks", list:[
+        { ic:"🎧", t:"朗读课文 3 遍 + 录音", d:"重点练 pays it back 连读弱读、but 轻主语重，录音对比 Mike 的示范" },
+        { ic:"💬", t:"用寒暄句编一段 30 秒独白", d:"How do you do today → as casual → nothing special → between work and home，连贯说出来" },
+        { ic:"📝", t:"每天单词打卡", d:"截图发给 Mike" },
+        { ic:"⚠️", t:"本节课后段待补充", d:"本份课堂记录至「复习环节」为止；一般疑问句精讲部分整理后会补充到本页" }
+      ]}
+    ]
+  }
+
+  /* 👇 新课时复制从这里开始 👇
+  ,{
+    id: 4,
+    label: "正式课 · 第 3 节",
+    title: "第 3 节 · ……",
+    date: "2026-10-23",
     summary: "……",
     sections: [ ... ]
   }
@@ -462,7 +637,7 @@ function esc(s){ return s; }
 function renderNav(activeId){
   const nav = document.getElementById('lessonNav');
   nav.innerHTML = LESSONS.map(l => `
-    <a class="lesson-link ${l.id===activeId?'active':''}" href="#/lesson/${l.id}">
+    <a class="lesson-link ${l.id===activeId?'active':''}" onclick="goLesson(${l.id})">
       <span class="lesson-num">${l.id}</span>
       <span class="lesson-name">${l.label || ('Lesson '+l.id)}</span>
       <span class="lesson-date">${l.date.slice(5).replace('-','/')}</span>
@@ -552,7 +727,31 @@ function renderHome(){
   renderNav(0);
 }
 
+function goLesson(id){
+  const l = LESSONS.find(x=>x.id===id) || LESSONS[0];
+  renderNav(l.id);
+  renderLesson(l);
+  if(history.replaceState) history.replaceState(null, '', '#/lesson/'+l.id);
+  closeMenu();
+  window.scrollTo(0,0);
+}
+
+function toggleMenu(){
+  const sb = document.querySelector('.sidebar');
+  const ov = document.getElementById('overlay');
+  const btn = document.getElementById('menuBtn');
+  const open = sb.classList.toggle('open');
+  ov.classList.toggle('show', open);
+  btn.textContent = open ? '✕' : '☰';
+}
+function closeMenu(){
+  document.querySelector('.sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('menuBtn').textContent = '☰';
+}
+
 function route(){
+  closeMenu();
   const m = location.hash.match(/#\/lesson\/(\d+)/);
   if(m){
     const l = LESSONS.find(x=>x.id==m[1]) || LESSONS[0];
