@@ -711,12 +711,107 @@ const LESSONS = [
       ]}
     ]
   }
-  /* 👇 新课时复制从这里开始 👇
   ,{
     id: 5,
     label: "正式课 · 第 4 节",
-    title: "第 4 节 · ……",
-    date: "2026-10-30",
+    title: "第 4 节 · 全英对话实战 + 描述好朋友五步法",
+    date: "2026-10-29",
+    teacher: "Mike 老师",
+    student: "Shirley",
+    summary: "热身朗读提速 · 第一次全英对话 How was your day · 描述我的一天完整段落 · 话题卡住的原因与对策 · 描述好朋友五步法",
+    sections: [
+      { type:"h3", text:"🗣️ 热身朗读（第三遍 · 提速训练）" },
+      { type:"tips", cards:[
+        { ic:"⚡", t:"这次要更快", d:"前面两遍求准，这一遍求快——简单的主谓宾连起来读，不停顿" },
+        { ic:"🎯", t:"挑词重读", d:"有意识挑重点单词重读，其他词快速、小声地带过去" },
+        { ic:"🔗", t:"连贯性优先", d:"I was having dinner 就连起来，别一词一顿；记住这种连贯的感觉" }
+      ]},
+      { type:"h3", text:"💬 全英对话实战一 · How was your day?（本课第一次全英对话）" },
+      { type:"convo", turns:[
+        { who:"Mike", en:"How was your day? What did you do today?", cn:"你今天过得怎么样？做了什么？", note:"⭐ 全英对话开场，学完疑问句+并列句，条件已经满足" },
+        { who:"Mike", en:"I'll go first. Today is a good day for me — when I got up, my customer told me he wants to pay the deposit. We have a new business! So I closed the deal. After work, I just went to the gym and did some exercise. So how about you?", cn:"我先来。今天对我来说很好——起床看到客户说要付定金，我们有新生意了，单子成了！下班后我去健身房锻炼。你呢？", note:"🎯 Mike 打样：一天的事用 1-2-3 顺序讲清楚" },
+        { who:"Shirley", en:"Congratulations on landing a big order! I'm really happy for you. This week I had quite an interesting week, too.", cn:"恭喜你拿下大订单！真为你高兴。我这一周也过得很有趣。", note:"✅ Shirley 的回应：先认可 + 再讲自己——这就是接话公式" }
+      ]},
+      { type:"h3", text:"🌟 接话公式 · 先给情绪价值，再讲自己" },
+      { type:"grammar", formula:"① 认可对方（That's + 形容词!）→ ② 讲自己的事（1-2-3 顺序）",
+        intro:[
+          "听完对方说好事，第一句<b>必须</b>是认可——不能只说 good it's good，要有情绪价值。",
+          "文字聊天：加感叹号 ❗；语音聊天：情能量高一点、语调向上。",
+          "认可之后自然过渡到自己：This week I had quite an interesting week, too.（我也是！）"
+        ],
+        chipsTitle:"认可表达库（语气从弱到强）",
+        chips:["That's good.","That's great.","That's nice.","That's cool.","That's awesome!","That's fantastic!","That's amazing!","I'm so happy for you!"] },
+      { type:"h3", text:"🎯 句型精讲 · 描述我的一天（课堂完整段落）" },
+      { type:"dialog", lines:[
+        { en:"This week I'm so happy. / This week was very interesting.", cn:"这周我很开心/过得很有趣。", tip:"💡 一周还没结束，不用过去时" },
+        { en:"I work out after work, so it helps me release stress.", cn:"我下班后锻炼，所以我能释放压力。", tip:"⭐ work out 锻炼最准确；英语爱用 it 开头（物称），比 my pressure has been released 更地道" },
+        { en:"Anyway, I would like to talk about today.", cn:"话说回来，我想讲讲今天。", tip:"⭐ anyway = 转换话题的万能词" },
+        { en:"Usually I reach out to new clients in the morning.", cn:"我通常早上触达新客户。", tip:"💡 reach out to = 触达/联系，比 develop（研发）准确" },
+        { en:"Then I follow up with regular clients.", cn:"然后跟进老客户。", tip:"💡 follow up with 跟进；老客户 = regular / existing clients" },
+        { en:"Today is my lucky day — I got two prospective client leads.", cn:"今天运气很好，获得了两个潜在客户线索。", tip:"⭐ lead /liːd/ 线索；prospective client 潜在客户" },
+        { en:"About the regular clients, I expect they will place the repeat orders next week.", cn:"老客户方面，我预计他们下周会返单。", tip:"💡 repeat order 返单；place the order 下单" },
+        { en:"All things are going well.", cn:"一切顺利。", tip:"⭐ 邮件结尾常用：I hope all things are going well." }
+      ]},
+      { type:"h3", text:"⚠️ 为什么会卡？Mike 诊断 + 对策" },
+      { type:"tips", cards:[
+        { ic:"🔁", t:"别背原文", d:"卡壳往往是因为想复述刚才背过的句子——要按中文重新捋，不追求 100% 复述，意思对就行" },
+        { ic:"🛤️", t:"生词兜弯说", d:"难的词不会说就拐个弯解释——练的是灵活表达，不是背难词" },
+        { ic:"🧩", t:"中文先拆开", d:"中文没想清说什么，英语就说不出来——先拆中文：谁+做什么，再翻译" },
+        { ic:"🗣️", t:" Shirley 的自评", d:"「现在脑子里知道先说什么了，反应好一些」——中译英书面快，对话懵，缺的就是中文拆解这一步" }
+      ]},
+      { type:"h3", text:"👭 全英对话实战二 · 描述好朋友（五步法）" },
+      { type:"grammar", formula:"① 是谁 → ② 好朋友的标准 → ③ TA 做的事符合标准 → ④ 总结重申",
+        intro:[
+          "Mike 给的话题框架：Who is your best friend? 用七八句话、and/but/so 衔接说清楚。",
+          "关键点：标准先行——先说「我认为好朋友的标准是什么」，再说「TA 做的事正好符合」，逻辑就立住了。",
+          "⭐ 中文拆解示范：成为好朋友的标准 → the standard of being good friends（standard 标准，the standard of…）"
+        ],
+        chipsTitle:"五步法",
+        chips:["① TA 是谁","② 好朋友标准","③ 符合标准的事","④ 总结重申"] },
+      { type:"reading", text:"My best friend is my colleague. I think <b>companionship</b> is the standard of being good friends. Her personality is <b>outgoing</b>, and we often <b>commute</b> to work together. When I don't understand our products, she always <b>takes the initiative</b> to <b>help me out</b>. I'm so happy to have a friend like her.",
+        gist:"🇨🇳 我的好朋友是我的同事。我觉得陪伴是成为好朋友的标准。她性格外向，我们经常一起通勤上下班。当我不懂产品时，她总是主动帮我解围。有这样的朋友我很开心。" },
+      { type:"h3", text:"📚 本课新词汇 Vocabulary" },
+      { type:"vocab", words:[
+        { w:"work out", ipa:"/wɜːk aʊt/", pos:"phr.", mean:"锻炼", note:"= do exercise；I work out after work." },
+        { w:"release stress", ipa:"/rɪˈliːs stres/", pos:"phr.", mean:"释放压力", note:"It helps me release stress. 物称 it 更地道" },
+        { w:"anyway", ipa:"/ˈeniweɪ/", pos:"adv.", mean:"话说回来；无论如何", note:"⭐ 转换话题万能词" },
+        { w:"reach out to", ipa:"/riːtʃ aʊt tuː/", pos:"phr.", mean:"触达，联系", note:"reach out to new clients 开发/触达客户" },
+        { w:"follow up with", ipa:"/ˈfɒləʊ ʌp wɪð/", pos:"phr.", mean:"跟进", note:"follow up with regular clients 跟进老客户" },
+        { w:"regular clients", ipa:"/ˈreɡjələ ˈklaɪənts/", pos:"n.", mean:"老客户", note:"= existing clients" },
+        { w:"lead", ipa:"/liːd/", pos:"n.", mean:"线索", note:"two prospective client leads 两个潜在客户线索" },
+        { w:"prospective", ipa:"/prəˈspektɪv/", pos:"adj.", mean:"潜在的", note:"prospective client = potential customer" },
+        { w:"repeat order", ipa:"/rɪˈpiːt ˈɔːdə(r)/", pos:"n.", mean:"返单，重复订单", note:"place repeat orders 下返单" },
+        { w:"deposit", ipa:"/dɪˈpɒzɪt/", pos:"n.", mean:"定金", note:"pay the deposit 付定金" },
+        { w:"companionship", ipa:"/kəmˈpæniənʃɪp/", pos:"n.", mean:"陪伴", note:"the standard of being good friends 好朋友的标准" },
+        { w:"outgoing", ipa:"/ˈaʊtɡəʊɪŋ/", pos:"adj.", mean:"外向的", note:"Her personality is outgoing." },
+        { w:"commute", ipa:"/kəˈmjuːt/", pos:"v.", mean:"通勤", note:"commute to work together 一起上下班" },
+        { w:"take the initiative", ipa:"/teɪk ði əˈnɪʃətɪv/", pos:"phr.", mean:"主动（做某事）", note:"she always takes the initiative to help me out" },
+        { w:"help me out", ipa:"/help miː aʊt/", pos:"phr.", mean:"帮我一把，帮我脱困", note:"口语高频，比 help me 更有画面感" },
+        { w:"close the deal", ipa:"/kləʊz ðə diːl/", pos:"phr.", mean:"成交", note:"I closed the deal today!" }
+      ]},
+      { type:"h3", text:"💡 课堂诊断 · Shirley 的口语短板定位" },
+      { type:"tips", cards:[
+        { ic:"✅", t:"已解决", d:"疑问句、中译英书面都很快——语法基础够用" },
+        { ic:"🎯", t:"最大短板", d:"「中文没拆开」：对话时不知道回什么，不是英语问题，是中文思维没转化——补起来很快" },
+        { ic:"🧭", t:"Mike 的教学方向", d:"跟随你的性格练，不必刻意话多；但客户场景要会找话题+反问" },
+        { ic:"🔑", t:"万能接话句", d:"客户说了一句不知道怎么接 → 先认可（情绪价值！）+ 语调向上 + 再反问" }
+      ]},
+      { type:"h3", text:"📌 课后任务" },
+      { type:"tasks", list:[
+        { ic:"🗣️", t:"背诵两个段落", d:"① 描述我的一天 ② 描述好朋友（五步法），脱稿说出来" },
+        { ic:"🔁", t:"练「接话」", d:"找一段英文播客/视频，听一句暂停——先给认可（That's awesome!），再说自己的观点" },
+        { ic:"🧩", t:"中文拆解训练", d:"每天挑 3 个中文想法，先写「谁+做什么」，再翻译——练思维转化" },
+        { ic:"📝", t:"每天单词打卡", d:"本课 16 个词加入打卡清单（anyway / reach out / follow up / lead…）" }
+      ]}
+    ]
+  }
+
+  /* 👇 新课时复制从这里开始 👇
+  ,{
+    id: 6,
+    label: "正式课 · 第 5 节",
+    title: "第 5 节 · ……",
+    date: "2026-11-02",
     summary: "……",
     sections: [ ... ]
   }
