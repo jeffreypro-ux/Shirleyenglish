@@ -806,12 +806,110 @@ const LESSONS = [
     ]
   }
 
-  /* 👇 新课时复制从这里开始 👇
   ,{
     id: 6,
     label: "正式课 · 第 5 节",
-    title: "第 5 节 · ……",
-    date: "2026-11-02",
+    title: "第 5 节 · 展会英语：紧张表达 + 公司介绍 + 优势话术",
+    date: "2026-11-05",
+    teacher: "Mike 老师",
+    student: "Shirley",
+    summary: "上海宝马展备战 · 描述这一周 · 第一次参加展会的紧张表达 · 公司介绍四句式 · 价格偏高时怎么说优势 · 展会提问三句话",
+    sections: [
+      { type:"h3", text:"🌅 课前闲聊 · 第一次参加上海宝马展" },
+      { type:"dialog", lines:[
+        { en:"When will you go to Shanghai?", cn:"你什么时候去上海？", tip:"⭐ 20–27 号，展会整整一周" },
+        { en:"I feel so nervous — it's my first time to join this exhibition.", cn:"我很紧张——这是我第一次参加展会。", tip:"💡 my first time doing sth 第一次做某事" },
+        { en:"Six people in our team will go, and our team leader will go with us.", cn:"我们组 6 个人去，团队长带队。", note:"" }
+      ]},
+      { type:"tips", cards:[
+        { ic:"🏗️", t:"上海宝马展 Bauma", d:"全球工程机械最大展会，11月20–27日，Shirley 第一次参加" },
+        { ic:"👥", t:"团队 6 人同行", d:"团队长（master/team leader）带队，有师傅在不用慌" },
+        { ic:"🎯", t:"Mike 的目标", d:"现在练得越详细，展会现场真的要说时才说得好" }
+      ]},
+      { type:"h3", text:"📅 中译英精讲 · 描述我这一周" },
+      { type:"dialog", lines:[
+        { en:"I had a fulfilling and enjoyable week.", cn:"这一周我过得很充实。", tip:"⭐ have a fulfilling week；充实=fulfilling，有意义=meaningful" },
+        { en:"I do pilates in the evening.", cn:"我晚上练普拉提。", tip:"💡 pilates 普拉提（音译词）；do pilates = do exercise" },
+        { en:"At work, most of the time I learn product knowledge for the Bauma exhibition in Shanghai.", cn:"上班时大部分时间我在学习产品知识，为上海宝马展做准备。", tip:"💡 at work 抽出；most of the time 大部分时间；for 表目的；上海不重要，放最后" }
+      ]},
+      { type:"h3", text:"😰 句型精讲 · 表达紧张（展会感受完整段落）" },
+      { type:"dialog", lines:[
+        { en:"Honestly, I'm quite nervous.", cn:"说实话，我挺紧张的。", tip:"⭐ honestly 副词更口语；to be honest 太严肃；kind of nervous = 有一点紧张" },
+        { en:"This is my first time attending the exhibition.", cn:"这是我第一次参加展会。", tip:"💡 my first time + doing" },
+        { en:"I'm not sure how to face it, and I'm worried about making mistakes.", cn:"我不知道怎么面对，担心犯错。", tip:"💡 be worried about / be afraid of + making mistakes" },
+        { en:"So I prepare a lot for this.", cn:"所以这段时间我做了很多准备。", tip:"💡 不用直译「这段时间」：prepare a lot for this / recently" },
+        { en:"For example, I learn the parameters of various models of excavators.", cn:"比如我学习各种型号挖掘机的参数。", tip:"⭐ parameters 参数 = specifications 规格；various models 各种型号" },
+        { en:"And how to communicate with customers, which is sales talk.", cn:"还有怎么和客户打交道——也就是话术。", tip:"⭐ which is 补充说明前面的内容；sales talk 销售话术" }
+      ]},
+      { type:"reading", text:"Honestly, I'm quite nervous. This is my first time attending the exhibition. I'm not sure how to face it, and I'm worried about making mistakes. So I prepare a lot for this. For example, I learn the parameters of various models of excavators, and how to communicate with customers, which is sales talk.",
+        gist:"📖 整段连读：说实话我挺紧张的——第一次参加展会，不知道怎么面对、担心犯错，所以做了很多准备：学习各型号挖掘机参数、练习和客户沟通的话术。" },
+      { type:"tips", cards:[
+        { ic:"🧱", t:"词对了连起来卡？", d:"大部分单词都说对了，只是不确定连接方式——词可以一个一个蹦，别疑虑，慢慢连" },
+        { ic:"🇨🇳", t:"别硬直译", d:"「这段时间」不用直译 this time；「不知道怎么面对」补主语 I'm not sure how to face it" }
+      ]},
+      { type:"h3", text:"🏢 公司介绍（展会版 · 课堂实战四句式）" },
+      { type:"dialog", lines:[
+        { en:"Our company's main products are excavators, bulldozers and loaders.", cn:"我们公司的主营产品是挖掘机、推土机和装载机。", tip:"💡 main products are…（复数用 are）" },
+        { en:"We have 15 years of experience.", cn:"我们有 15 年经验。", tip:"💡 experience 经验（不可数）" },
+        { en:"Our customers have crossed the world.", cn:"我们的客户遍布全球。", tip:"⭐ 现在完成时（从开业到现在）；across the world 遍布全球" },
+        { en:"We belong to the first tier in China.", cn:"我们是国内的龙头企业。", tip:"⭐ 不直译「龙头」：一线 = first tier（类比 first-tier city 一线城市）；belong to 属于" }
+      ]},
+      { type:"h3", text:"💪 公司优势话术（价格偏高时怎么说）" },
+      { type:"dialog", lines:[
+        { en:"We have various products and comprehensive after-sales support.", cn:"我们产品种类齐全，售后体系完善。", tip:"⭐ comprehensive 全面的；after-sales support 售后支持" },
+        { en:"We have overseas engineers.", cn:"我们有海外工程师。", note:"" },
+        { en:"We are able to arrange them to come to your site and fix the technical issues.", cn:"我们能安排他们去您的现场解决技术问题。", tip:"⭐ be able to 能够；arrange 安排；site 现场；technical 技术的（形容词）；solve/fix the issue 解决问题" }
+      ]},
+      { type:"h3", text:"💡 Mike 业务课 · 贵有贵的优势，要说出来" },
+      { type:"tips", cards:[
+        { ic:"💰", t:"价格偏高怎么办", d:"市场很卷、你们价格偏高——但贵有贵的优势，关键能不能「说出来、搜出来」" },
+        { ic:"🧰", t:"你们的真实优势", d:"产品齐全 + 售后及时 + 配件齐全一次打包 + 印尼有驻点——能做到就是真优势" },
+        { ic:"🤝", t:"做业务不用太老实", d:"诚恳可以，但别过分老实——太老实的人赚不到钱；业务都有适当的表达技巧" },
+        { ic:"🚢", t:"展会报价前问什么", d:"产品 → 型号参数 → 运输方式/港口 → 贸易术语；客户需求明确就可以直接报价" }
+      ]},
+      { type:"h3", text:"🎯 展会提问三句话（客户到展位时）" },
+      { type:"examples", list:[
+        { en:"Would you like our product catalog?", cn:"您想看看我们的产品目录吗？", tip:"⭐ 开场破冰" },
+        { en:"What's your main business?", cn:"您的主营业务是什么？", tip:"💡 第 1 节学的核心句，展会直接用" },
+        { en:"Do you have any target model in mind?", cn:"您有没有意向的机型？", tip:"🎯 Mike 认为最实用的一句——问意向机型，客户直接说要什么" }
+      ]},
+      { type:"h3", text:"📚 本课新词汇 Vocabulary" },
+      { type:"vocab", words:[
+        { w:"exhibition", ipa:"/ˌeksɪˈbɪʃn/", pos:"n.", mean:"展会，展览", note:"attend the exhibition 参加展会" },
+        { w:"Bauma", ipa:"/ˈbaʊmə/", pos:"n.", mean:"宝马展（工程机械展）", note:"the Bauma exhibition in Shanghai" },
+        { w:"fulfilling", ipa:"/fʊlˈfɪlɪŋ/", pos:"adj.", mean:"充实的", note:"I had a fulfilling week." },
+        { w:"pilates", ipa:"/pɪˈlɑːtiːz/", pos:"n.", mean:"普拉提", note:"do pilates in the evening" },
+        { w:"honestly", ipa:"/ˈɒnɪstli/", pos:"adv.", mean:"说实话（口语）", note:"比 to be honest 轻松；kind of 有一点" },
+        { w:"be worried about", ipa:"/bi ˈwʌrid əˈbaʊt/", pos:"phr.", mean:"担心", note:"worried about making mistakes 担心犯错" },
+        { w:"parameter", ipa:"/pəˈræmɪtə(r)/", pos:"n.", mean:"参数", note:"= specification 规格" },
+        { w:"various", ipa:"/ˈveəriəs/", pos:"adj.", mean:"各种各样的", note:"various models 各种型号" },
+        { w:"sales talk", ipa:"/seɪlz tɔːk/", pos:"n.", mean:"销售话术", note:"which is sales talk 也就是话术" },
+        { w:"bulldozer", ipa:"/ˈbʊldəʊzə(r)/", pos:"n.", mean:"推土机", note:"excavators, bulldozers and loaders" },
+        { w:"across the world", ipa:"/əˈkrɒs ðə wɜːld/", pos:"phr.", mean:"遍布全球", note:"customers have crossed the world" },
+        { w:"first tier", ipa:"/fɜːst tɪə(r)/", pos:"n.", mean:"一线；龙头", note:"belong to the first tier in China 国内龙头" },
+        { w:"comprehensive", ipa:"/ˌkɒmprɪˈhensɪv/", pos:"adj.", mean:"全面的", note:"comprehensive after-sales support 完善售后" },
+        { w:"be able to", ipa:"/bi ˈeɪbl tuː/", pos:"phr.", mean:"能够", note:"we are able to arrange… 我们能安排…" },
+        { w:"site", ipa:"/saɪt/", pos:"n.", mean:"现场", note:"come to your site 到您的现场" },
+        { w:"technical", ipa:"/ˈteknɪkl/", pos:"adj.", mean:"技术的", note:"⚠️ 形容词；technology 是名词" },
+        { w:"issue", ipa:"/ˈɪʃuː/", pos:"n.", mean:"问题（正式）", note:"solve / fix / resolve the technical issues" },
+        { w:"target model", ipa:"/ˈtɑːɡɪt ˈmɒdl/", pos:"n.", mean:"意向机型", note:"Do you have any target model in mind?" }
+      ]},
+      { type:"h3", text:"📌 课后任务" },
+      { type:"tasks", list:[
+        { ic:"🎤", t:"练熟三段话", d:"① 描述这一周 ② 紧张+准备段落 ③ 公司介绍+优势话术——展会现场直接用" },
+        { ic:"🏗️", t:"展会实战", d:"11月20–27日上海宝马展：多问客户（三句话起步），回来跟 Mike 分享战况" },
+        { ic:"📒", t:"收集新词", d:"展会上听到的生词记下来，回来更新到复习站" },
+        { ic:"📝", t:"每天单词打卡", d:"本课 18 个词加入打卡清单" }
+      ]}
+    ]
+  }
+
+  /* 👇 新课时复制从这里开始 👇
+  ,{
+    id: 7,
+    label: "正式课 · 第 6 节",
+    title: "第 6 节 · ……",
+    date: "2026-11-09",
     summary: "……",
     sections: [ ... ]
   }
