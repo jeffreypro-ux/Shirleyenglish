@@ -110,6 +110,10 @@
   .quiz .a .cn{color:var(--sub);font-size:13px}
   .quiz .a .tip{margin:6px 0 0;font-size:12.5px}
   .footer{color:var(--sub)};font-size:12.5px;text-align:center;padding:26px 0}
+  .replay-btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:12px 22px;font-size:15px;font-weight:700;text-decoration:none;margin-top:22px;box-shadow:0 3px 10px rgba(179,84,46,.3);transition:.15s}
+  .replay-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(179,84,46,.4)}
+  .replay-link{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;background:#3a2a20;color:#f0c9b5;cursor:pointer;text-decoration:none;margin-bottom:6px;font-size:13.5px;font-weight:600;transition:.15s}
+  .replay-link:hover{background:var(--accent);color:#fff}
   .menu-btn{display:none}
   .overlay{display:none}
   @media (max-width:860px){
@@ -165,6 +169,7 @@
   <aside class="sidebar">
     <div class="brand">Shirley <span>英语口语</span></div>
     <div class="tagline">课堂复习站 · Mike 1v1</div>
+    <a class="replay-link" href="https://my.feishu.cn/drive/folder/S8Rzf6ioNlBAMpdsBOUc9Ymjnxg?from=space_personal_filelist" target="_blank" rel="noopener">🎬 课程回放（飞书）</a>
     <div class="nav-title">课程列表</div>
     <nav id="lessonNav"></nav>
   </aside>
@@ -1002,6 +1007,7 @@ function renderHome(){
     <div class="hero"><div class="book">📒</div>
       <h1>Shirley 英语口语 · 课堂复习站</h1>
       <p>每一节课的重点、单词、句型、对话示范都会整理在这里。上课前翻一翻、作业前看一看，把课堂内容真正变成自己的东西。</p>
+      <a class="replay-btn" href="https://my.feishu.cn/drive/folder/S8Rzf6ioNlBAMpdsBOUc9Ymjnxg?from=space_personal_filelist" target="_blank" rel="noopener">🎬 观看课程回放（飞书）</a>
     </div>
     <div class="stats">
       <div class="stat"><b>${LESSONS.length}</b><div>已更新课程</div></div>
